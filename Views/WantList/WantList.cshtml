@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Want List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        GetWantListData();
+    });
+</script>
+
+<script id="wantListTemplate" type="text/x-jquery-tmpl"> 
+    <div style="padding: 10px 5px 10px 5px;">
+        <h3 class="SideBySide">${Value[0].StatusDisplay}</h3>
+        <div class="FloatLeft">
+            <a href="javascript:AddBookToWantStatus(${Key})">Add Book</a>
+        </div>
+        <div class="DontFloatOverMe"></div>
+        <table>
+            <tbody>
+                {{tmpl({Wants: Value}) $("#wantItemsTemplate")}}
+            </tbody>
+        </table>
+    </div>
+</script> 
+
+<script id="wantItemsTemplate" type="text/x-jquery-tmpl">
+    {{each(i, want) Wants}}
+    <tr class="{{if i % 2 != 0}}AlternateRow{{/if}}">
+        <td style="width: 350px;">
+            ${want.Book.Series.Name} #${want.Book.Issue}
+            {{if want.Book.IsSpecialCover}}
+            (${want.Book.Notes})
+            {{/if}}
+        </td>
+        <td style="width: 75px;"><a href="javascript:AddBookToInventoryFromWantList(${want.Id})">Bought</a></td>
+        <td style="width: auto;">
+            @*<a href="javascript:ShowPanel('changeStatusPanel${want.Book.Id}')">Change Status</a>*@
+            <a href="javascript:ChangeBookWantStatus('changeStatusPanel${want.Book.Id}', ${want.Book.Id})">Hold</a>
+            <div id="changeStatusPanel${want.Book.Id}" style="display: none;">
+                <select>
+                    <option value="1">Wanted</option>
+                    <option value="4">Held At Store</option>
+                    <option value="3">Back Issue</option>
+                </select>
+                <input type="submit" value="Save Status Change" onclick=" ChangeBookWantStatus('changeStatusPanel${want.Book.Id}', ${want.Book.Id}) " />
+            </div>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+
+<div id="wantListPanel" class="Content">
+</div>
+
+<div id="AddBookToStatusPanel" class="Modal" style="display: none;">
+    <div class="Content">
+        <input type="hidden" id="wantStatusIdField" />
+        <div class="LargeInput">
+            <select id="bookToAdd"></select> <a href="javascript:ShowAddBookForWants()">Add Book</a>
+        </div>
+        <div class="ButtonPanel">
+            <input type="submit" value="Save" onclick="SaveBookToWantStatus() " />
+        </div>
+        <div class="DontFloatOverMe"></div>
+    </div>
+
+    <div id="addBooksForWant" class="Content" style="display: none;">
+        @{ Html.RenderPartial("_AddBook"); }
+    </div>
+</div>
