@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="StoreContainer">
+    <EntitySet Name="Book" EntityType="Store.Book" store:Type="Tables" />
+    <EntitySet Name="BookInventory" EntityType="Store.BookInventory" store:Type="Tables" />
+    <EntitySet Name="InventoryStatus" EntityType="Store.InventoryStatus" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Store.Location" store:Type="Tables" />
+    <EntitySet Name="Publisher" EntityType="Store.Publisher" store:Type="Tables" />
+    <EntitySet Name="Series" EntityType="Store.Series" store:Type="Tables" />
+    <EntitySet Name="WantList" EntityType="Store.WantList" store:Type="Tables" />
+    <EntitySet Name="WantListStatus" EntityType="Store.WantListStatus" store:Type="Tables" />
+    <AssociationSet Name="Book_BookInventory" Association="Store.Book_BookInventory">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="BookInventory" EntitySet="BookInventory" />
+    </AssociationSet>
+    <AssociationSet Name="Book_WantList" Association="Store.Book_WantList">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="WantList" EntitySet="WantList" />
+    </AssociationSet>
+    <AssociationSet Name="InventoryStatus_BookInventory" Association="Store.InventoryStatus_BookInventory">
+      <End Role="InventoryStatus" EntitySet="InventoryStatus" />
+      <End Role="BookInventory" EntitySet="BookInventory" />
+    </AssociationSet>
+    <AssociationSet Name="Location_BookInventory" Association="Store.Location_BookInventory">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="BookInventory" EntitySet="BookInventory" />
+    </AssociationSet>
+    <AssociationSet Name="Location_Location" Association="Store.Location_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="Location1" EntitySet="Location" />
+    </AssociationSet>
+    <AssociationSet Name="Publisher_Series" Association="Store.Publisher_Series">
+      <End Role="Publisher" EntitySet="Publisher" />
+      <End Role="Series" EntitySet="Series" />
+    </AssociationSet>
+    <AssociationSet Name="Series_Book" Association="Store.Series_Book">
+      <End Role="Series" EntitySet="Series" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="WantListStatus_WantList" Association="Store.WantListStatus_WantList">
+      <End Role="WantListStatus" EntitySet="WantListStatus" />
+      <End Role="WantList" EntitySet="WantList" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Issue" Type="int" Nullable="false" />
+    <Property Name="IsSpecialCover" Type="bit" Nullable="false" />
+    <Property Name="SeriesId" Type="int" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="BookInventory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BookId" Type="int" Nullable="false" />
+    <Property Name="InventoryStatusId" Type="int" Nullable="false" />
+    <Property Name="LocationId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InventoryStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="NextLocationId" Type="int" />
+  </EntityType>
+  <EntityType Name="Publisher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Series">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="PublisherId" Type="int" Nullable="false" />
+    <Property Name="IsCurrent" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WantList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BookId" Type="int" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="100" />
+    <Property Name="WantListStatusId" Type="int" />
+  </EntityType>
+  <EntityType Name="WantListStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="Book_BookInventory">
+    <End Role="Book" Type="Store.Book" Multiplicity="1" />
+    <End Role="BookInventory" Type="Store.BookInventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookInventory">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Book_WantList">
+    <End Role="Book" Type="Store.Book" Multiplicity="0..1" />
+    <End Role="WantList" Type="Store.WantList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WantList">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="InventoryStatus_BookInventory">
+    <End Role="InventoryStatus" Type="Store.InventoryStatus" Multiplicity="1" />
+    <End Role="BookInventory" Type="Store.BookInventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookInventory">
+        <PropertyRef Name="InventoryStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Location_BookInventory">
+    <End Role="Location" Type="Store.Location" Multiplicity="1" />
+    <End Role="BookInventory" Type="Store.BookInventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookInventory">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Location_Location">
+    <End Role="Location" Type="Store.Location" Multiplicity="0..1" />
+    <End Role="Location1" Type="Store.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Location1">
+        <PropertyRef Name="NextLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Publisher_Series">
+    <End Role="Publisher" Type="Store.Publisher" Multiplicity="1" />
+    <End Role="Series" Type="Store.Series" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Publisher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Series">
+        <PropertyRef Name="PublisherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Series_Book">
+    <End Role="Series" Type="Store.Series" Multiplicity="1" />
+    <End Role="Book" Type="Store.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Series">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="SeriesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WantListStatus_WantList">
+    <End Role="WantListStatus" Type="Store.WantListStatus" Multiplicity="0..1" />
+    <End Role="WantList" Type="Store.WantList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WantListStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WantList">
+        <PropertyRef Name="WantListStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ComicBookModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ComicBookEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Books" EntityType="ComicBookModel.Book" />
+    <EntitySet Name="BookInventories" EntityType="ComicBookModel.BookInventory" />
+    <EntitySet Name="InventoryStatus" EntityType="ComicBookModel.InventoryStatu" />
+    <EntitySet Name="Locations" EntityType="ComicBookModel.Location" />
+    <EntitySet Name="Publishers" EntityType="ComicBookModel.Publisher" />
+    <EntitySet Name="Series" EntityType="ComicBookModel.Series" />
+    <EntitySet Name="WantLists" EntityType="ComicBookModel.WantList" />
+    <EntitySet Name="WantListStatus" EntityType="ComicBookModel.WantListStatu" />
+    <AssociationSet Name="Book_BookInventory" Association="ComicBookModel.Book_BookInventory">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="BookInventory" EntitySet="BookInventories" />
+    </AssociationSet>
+    <AssociationSet Name="Book_WantList" Association="ComicBookModel.Book_WantList">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="WantList" EntitySet="WantLists" />
+    </AssociationSet>
+    <AssociationSet Name="Series_Book" Association="ComicBookModel.Series_Book">
+      <End Role="Series" EntitySet="Series" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="InventoryStatus_BookInventory" Association="ComicBookModel.InventoryStatus_BookInventory">
+      <End Role="InventoryStatus" EntitySet="InventoryStatus" />
+      <End Role="BookInventory" EntitySet="BookInventories" />
+    </AssociationSet>
+    <AssociationSet Name="Location_BookInventory" Association="ComicBookModel.Location_BookInventory">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="BookInventory" EntitySet="BookInventories" />
+    </AssociationSet>
+    <AssociationSet Name="Publisher_Series" Association="ComicBookModel.Publisher_Series">
+      <End Role="Publisher" EntitySet="Publishers" />
+      <End Role="Series" EntitySet="Series" />
+    </AssociationSet>
+    <AssociationSet Name="WantListStatus_WantList" Association="ComicBookModel.WantListStatus_WantList">
+      <End Role="WantListStatus" EntitySet="WantListStatus" />
+      <End Role="WantList" EntitySet="WantLists" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Issue" Type="Int32" />
+    <Property Name="IsSpecialCover" Type="Boolean" />
+    <Property Name="SeriesId" Type="Int32" />
+    <NavigationProperty Name="BookInventories" Relationship="ComicBookModel.Book_BookInventory" FromRole="Book" ToRole="BookInventory" />
+    <NavigationProperty Name="WantLists" Relationship="ComicBookModel.Book_WantList" FromRole="Book" ToRole="WantList" />
+    <NavigationProperty Name="Series" Relationship="ComicBookModel.Series_Book" FromRole="Book" ToRole="Series" />
+  </EntityType>
+  <EntityType Name="BookInventory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BookId" Type="Int32" />
+    <Property Name="InventoryStatusId" Type="Int32" />
+    <Property Name="LocationId" Type="Int32" />
+    <NavigationProperty Name="Book" Relationship="ComicBookModel.Book_BookInventory" FromRole="BookInventory" ToRole="Book" />
+    <NavigationProperty Name="InventoryStatu" Relationship="ComicBookModel.InventoryStatus_BookInventory" FromRole="BookInventory" ToRole="InventoryStatus" />
+    <NavigationProperty Name="Location" Relationship="ComicBookModel.Location_BookInventory" FromRole="BookInventory" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="InventoryStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="BookInventories" Relationship="ComicBookModel.InventoryStatus_BookInventory" FromRole="InventoryStatus" ToRole="BookInventory" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="BookInventories" Relationship="ComicBookModel.Location_BookInventory" FromRole="Location" ToRole="BookInventory" />
+  </EntityType>
+  <EntityType Name="Publisher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Series" Relationship="ComicBookModel.Publisher_Series" FromRole="Publisher" ToRole="Series" />
+  </EntityType>
+  <EntityType Name="Series">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="PublisherId" Type="Int32" />
+    <NavigationProperty Name="Books" Relationship="ComicBookModel.Series_Book" FromRole="Series" ToRole="Book" />
+    <NavigationProperty Name="Publisher" Relationship="ComicBookModel.Publisher_Series" FromRole="Series" ToRole="Publisher" />
+  </EntityType>
+  <EntityType Name="WantList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BookId" Type="Int32" />
+    <Property Name="Notes" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="WantListStatusId" Type="Int32" />
+    <NavigationProperty Name="Book" Relationship="ComicBookModel.Book_WantList" FromRole="WantList" ToRole="Book" />
+    <NavigationProperty Name="WantListStatu" Relationship="ComicBookModel.WantListStatus_WantList" FromRole="WantList" ToRole="WantListStatus" />
+  </EntityType>
+  <EntityType Name="WantListStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="WantLists" Relationship="ComicBookModel.WantListStatus_WantList" FromRole="WantListStatus" ToRole="WantList" />
+  </EntityType>
+  <Association Name="Book_BookInventory">
+    <End Role="Book" Type="ComicBookModel.Book" Multiplicity="0..1" />
+    <End Role="BookInventory" Type="ComicBookModel.BookInventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookInventory">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Book_WantList">
+    <End Role="Book" Type="ComicBookModel.Book" Multiplicity="0..1" />
+    <End Role="WantList" Type="ComicBookModel.WantList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WantList">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Series_Book">
+    <End Role="Series" Type="ComicBookModel.Series" Multiplicity="0..1" />
+    <End Role="Book" Type="ComicBookModel.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Series">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="SeriesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="InventoryStatus_BookInventory">
+    <End Role="InventoryStatus" Type="ComicBookModel.InventoryStatu" Multiplicity="0..1" />
+    <End Role="BookInventory" Type="ComicBookModel.BookInventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookInventory">
+        <PropertyRef Name="InventoryStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Location_BookInventory">
+    <End Role="Location" Type="ComicBookModel.Location" Multiplicity="0..1" />
+    <End Role="BookInventory" Type="ComicBookModel.BookInventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookInventory">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Publisher_Series">
+    <End Role="Publisher" Type="ComicBookModel.Publisher" Multiplicity="1" />
+    <End Role="Series" Type="ComicBookModel.Series" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Publisher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Series">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WantListStatus_WantList">
+    <End Role="WantListStatus" Type="ComicBookModel.WantListStatu" Multiplicity="0..1" />
+    <End Role="WantList" Type="ComicBookModel.WantList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WantListStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WantList">
+        <PropertyRef Name="WantListStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
