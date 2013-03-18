@@ -315,11 +315,13 @@ function SearchBooks() {
 function LoadBookSearch(result) {
     var books = result.returnableBooks;
     var locations = result.locations;
+    var inventoryStatus = result.InventoryStatus;
+    var wantStatus = result.wantStatuses;
     
     $("#bookSearchResultPanel").show();
     
     $("#bookSearchResultGrid tbody").empty();
-    $("#bookSearchResultTemplate").tmpl({ Books: books, Locations: locations }).appendTo("#bookSearchResultGrid tbody");
+    $("#bookSearchResultTemplate").tmpl({ Books: books, Locations: locations, InventoryStatus: inventoryStatus, WantStatuses: wantStatus }).appendTo("#bookSearchResultGrid tbody");
 }
 
 function SaveSeriesSuccess() {

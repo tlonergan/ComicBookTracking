@@ -85,7 +85,6 @@ namespace ComicBook.Controllers
                         });
                 }
 
-
                 var groups =
                     dataStore.Books.Where(
                         b =>
@@ -133,6 +132,13 @@ namespace ComicBook.Controllers
                     locations.Add(location.MapLocation());
                 }
 
+                List<KeyValuePair<int, string>> statuses =
+                    dataStore.InventoryStatus.ToList()
+                             .Select(s => new KeyValuePair<int, string>(s.Id, s.Status))
+                             .ToList();
+
+                List<KeyValuePair<int, string>> wantStatuses = dataStore.WantListStatus.ToList().MapWantStatuses();
+
                 if (!string.IsNullOrEmpty(seriesName))
                     books = books.Where(b => b.Series.Name.Contains(seriesName));
                 if (issue.HasValue)
@@ -162,7 +168,9 @@ namespace ComicBook.Controllers
                 return Json(new
                     {
                         returnableBooks,
-                        locations
+                        locations,
+                        InventoryStatus = statuses,
+                        wantStatuses
                     },
                             JsonRequestBehavior.AllowGet);
             }

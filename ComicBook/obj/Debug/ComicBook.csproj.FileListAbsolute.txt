@@ -54,14 +54,7 @@ C:\Source\ComicBookTracking\ComicBook\bin\System.Web.Razor.dll
 C:\Source\ComicBookTracking\ComicBook\bin\System.Web.WebPages.Deployment.dll
 C:\Source\ComicBookTracking\ComicBook\bin\System.Web.WebPages.dll
 C:\Source\ComicBookTracking\ComicBook\bin\System.Web.WebPages.Razor.dll
-C:\Source\ComicBookTracking\ComicBook\bin\Microsoft.Practices.Unity.dll
-C:\Source\ComicBookTracking\ComicBook\bin\Microsoft.Practices.ServiceLocation.dll
-C:\Source\ComicBookTracking\ComicBook\bin\Microsoft.Practices.Unity.Interception.dll
 C:\Source\ComicBookTracking\ComicBook\bin\EntityFramework.xml
-C:\Source\ComicBookTracking\ComicBook\bin\Microsoft.Practices.EnterpriseLibrary.Common.pdb
-C:\Source\ComicBookTracking\ComicBook\bin\Microsoft.Practices.EnterpriseLibrary.Common.xml
-C:\Source\ComicBookTracking\ComicBook\bin\Microsoft.Practices.EnterpriseLibrary.Data.pdb
-C:\Source\ComicBookTracking\ComicBook\bin\Microsoft.Practices.EnterpriseLibrary.Data.xml
 C:\Source\ComicBookTracking\ComicBook\bin\Newtonsoft.Json.xml
 C:\Source\ComicBookTracking\ComicBook\bin\System.Net.Http.Formatting.xml
 C:\Source\ComicBookTracking\ComicBook\bin\System.Web.Helpers.xml
@@ -72,9 +65,5 @@ C:\Source\ComicBookTracking\ComicBook\bin\System.Web.Razor.xml
 C:\Source\ComicBookTracking\ComicBook\bin\System.Web.WebPages.xml
 C:\Source\ComicBookTracking\ComicBook\bin\System.Web.WebPages.Deployment.xml
 C:\Source\ComicBookTracking\ComicBook\bin\System.Web.WebPages.Razor.xml
-C:\Source\ComicBookTracking\ComicBook\bin\Microsoft.Practices.Unity.pdb
-C:\Source\ComicBookTracking\ComicBook\bin\Microsoft.Practices.ServiceLocation.pdb
-C:\Source\ComicBookTracking\ComicBook\bin\Microsoft.Practices.Unity.Interception.pdb
-C:\Source\ComicBookTracking\ComicBook\obj\Debug\ComicBook.csprojResolveAssemblyReference.cache
 C:\Source\ComicBookTracking\ComicBook\obj\Debug\ComicBook.dll
 C:\Source\ComicBookTracking\ComicBook\obj\Debug\ComicBook.pdb
