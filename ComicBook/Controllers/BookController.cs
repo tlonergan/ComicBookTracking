@@ -61,7 +61,17 @@ namespace ComicBook.Controllers
 
                 Book book = bookToSave.MapBook();
 
-                books.Add(book);
+                var existingBook = books.SingleOrDefault(b => b.Id == book.Id);
+                if (existingBook == null)
+                    books.Add(book);
+                else
+                {
+                    existingBook.Id = book.Id;
+                    existingBook.IsSpecialCover = book.IsSpecialCover;
+                    existingBook.Issue = book.Issue;
+                    existingBook.BookInventories.ForEach(bi=>bi.InventoryStatusId = book.BookInventories.First().InventoryStatusId);
+                    existingBook.WantLists.ForEach(wl=>wl.WantListStatusId = book.WantLists.First().WantListStatusId);
+                }
                 dataStore.SaveChanges();
 
                 Want want = bookToSave.Want;

@@ -420,3 +420,7 @@ function LoadBookSearchData(result) {
 
     $("#locationListTemplate").tmpl({ Locations: result.locations }).appendTo("#searchLocationNameList");
 }
+
+function SaveExistingBook(rowName) {
+   var 
+}
