@@ -67,3 +67,4 @@ C:\Source\ComicBookTracking\ComicBook\bin\System.Web.WebPages.Deployment.xml
 C:\Source\ComicBookTracking\ComicBook\bin\System.Web.WebPages.Razor.xml
 C:\Source\ComicBookTracking\ComicBook\obj\Debug\ComicBook.dll
 C:\Source\ComicBookTracking\ComicBook\obj\Debug\ComicBook.pdb
+C:\Source\ComicBookTracking\ComicBook\obj\Debug\ComicBook.csprojResolveAssemblyReference.cache

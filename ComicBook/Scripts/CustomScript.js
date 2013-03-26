@@ -13,6 +13,18 @@ function HidePanel(panelName) {
     //Erase Fields
 }
 
+function ShowEditPanel(panelName, controlToHide, controlToShow) {
+    ShowPanel(panelName);
+    HidePanel(controlToHide);
+    ShowPanel(controlToShow);
+}
+
+function HideEditPanel(panelName, controlToHide, controlToShow) {
+    HidePanel(panelName);
+    HidePanel(controlToHide);
+    ShowPanel(controlToShow);
+}
+
 function ShowModal(panelName) {
     $("#" + panelName).dialog({ modal: true, resizable: false, draggable: false, title: "Add Book", width: 800, position: { my: "top", at: "top", of: window } });
 }
@@ -415,6 +427,7 @@ function GetBookCount() {
         traditional: true
     });
 }
+
 function LoadBookSearchData(result) {
     LoadAddBooks(SaveBookFromSearch, "addBookAdditionalTemplate", { WantStatuses: result.wantStatuses, Locations: result.locations, InventoryStatus: result.inventoryStatus });
 
@@ -422,5 +435,8 @@ function LoadBookSearchData(result) {
 }
 
 function SaveExistingBook(rowName) {
-   var 
+    var row = $("#" + rowName);
+
+    var isChecked = row.find("#isSpecialIssueCheckbox");
+    alert(isChecked);
 }
