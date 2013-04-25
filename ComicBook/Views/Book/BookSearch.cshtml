@@ -206,7 +206,7 @@
         </td>
         <td></td>
         <td class="SmallInput">
-            <select>
+            <select id="wantStatusLists">
                 <option></option>
                 {{each(i, wantStatus) WantStatuses}}
                 <option value="${wantStatus.Key}" {{if Want.StatusDisplay == wantStatus.Value}}selected="selected"{{/if}}>${wantStatus.Value}</option>

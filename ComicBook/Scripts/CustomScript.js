@@ -437,6 +437,11 @@ function LoadBookSearchData(result) {
 function SaveExistingBook(rowName) {
     var row = $("#" + rowName);
 
-    var isChecked = row.find("#isSpecialIssueCheckbox");
-    alert(isChecked);
+    var isChecked = row.find("#isSpecialIssueCheckbox").is(":checked");
+    var issueNumber = row.find("#issueNumberTextBox").val();
+    var notes = row.find("#notes").val();
+    var bookStatus = row.find("#statusLists option:selected").val();
+    var wantStatus = row.find("#wantStatusLists option:selected").val();
+    
+    alert(wantStatus);
 }
