@@ -55,45 +55,48 @@ namespace ComicBook.Controllers
             try
             {
                 DbSet<Book> books = dataStore.Books;
-                if (!bookToSave.IsSpecialCover
-                    && books.Any(b => b.SeriesId == bookToSave.Series.Id && b.Issue == bookToSave.Issue))
-                    throw new Exception("Book exists");
-
                 Book book = bookToSave.MapBook();
 
-                var existingBook = books.SingleOrDefault(b => b.Id == book.Id);
+                Book existingBook = books.SingleOrDefault(b => b.Id == book.Id);
                 if (existingBook == null)
+                {
+                    if (!bookToSave.IsSpecialCover
+                        && books.Any(b => b.SeriesId == bookToSave.Series.Id && b.Issue == bookToSave.Issue))
+                        throw new Exception("Book exists");
                     books.Add(book);
+
+                    Want want = bookToSave.Want;
+                    if (want != null && want.StatusId != 0)
+                    {
+                        dataStore.WantLists.Add(new WantList
+                            {
+                                BookId = book.Id,
+                                WantListStatusId = want.StatusId
+                            });
+                    }
+
+                    Models.Location location = bookToSave.Location;
+                    if (location != null && location.Id != 0)
+                    {
+                        dataStore.BookInventories.Add(new BookInventory
+                            {
+                                BookId = book.Id,
+                                LocationId = location.Id,
+                                InventoryStatusId = (int) bookToSave.Status
+                            });
+                    }
+                }
                 else
                 {
                     existingBook.Id = book.Id;
                     existingBook.IsSpecialCover = book.IsSpecialCover;
+                    existingBook.Notes = book.Notes;
                     existingBook.Issue = book.Issue;
-                    existingBook.BookInventories.ForEach(bi=>bi.InventoryStatusId = book.BookInventories.First().InventoryStatusId);
-                    existingBook.WantLists.ForEach(wl=>wl.WantListStatusId = book.WantLists.First().WantListStatusId);
+                    existingBook.BookInventories.ForEach(
+                        bi => bi.InventoryStatusId = book.BookInventories.First().InventoryStatusId);
+                    existingBook.WantLists.ForEach(wl => wl.WantListStatusId = book.WantLists.First().WantListStatusId);
                 }
                 dataStore.SaveChanges();
-
-                Want want = bookToSave.Want;
-                if (want != null && want.StatusId != 0)
-                {
-                    dataStore.WantLists.Add(new WantList
-                        {
-                            BookId = book.Id,
-                            WantListStatusId = want.StatusId
-                        });
-                }
-
-                Models.Location location = bookToSave.Location;
-                if (location != null && location.Id != 0)
-                {
-                    dataStore.BookInventories.Add(new BookInventory
-                        {
-                            BookId = book.Id,
-                            LocationId = location.Id,
-                            InventoryStatusId = (int) bookToSave.Status
-                        });
-                }
 
                 var groups =
                     dataStore.Books.Where(
@@ -103,7 +106,8 @@ namespace ComicBook.Controllers
                          dataStore.Books.Any(
                              b2 =>
                              b2.Notes == b.Notes && b2.SeriesId == b.SeriesId && b2.Issue == b.Issue && b2.Id != b.Id)))
-                             .GroupBy(b => new {b.SeriesId, b.Issue});
+                             .GroupBy(b => new {b.SeriesId, b.Issue}).ToList();
+
                 foreach (var group in groups)
                 {
                     if (group.Count() < 2)

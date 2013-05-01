@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "EditSeries";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadSeriesDrop();
+        GetPublishers(function() {
+        }, "seriesPublisher");
+    });
+
+    function LoadSeriesDrop() {
+        var inactiveOnly = $("#onlyInactiveSeries").is(":checked");
+        GetAllSeries(inactiveOnly);
+    }
+
+    function SeriesSelected() {
+        BookSeriesChanged();
+
+        HidePanel("editSeriesPanel");
+
+        var seriesId = $("#bookSeries option:selected").val();
+
+        var isNumber = Number(seriesId);
+        if (!isNaN(isNumber) && isNumber != 0) {
+            GetSeries(seriesId, LoadEditSeries);
+        }
+    }
+
+    function LoadEditSeries(result) {
+        ShowPanel("editSeriesPanel");
+
+        $("#editSeriesId").val(result.Id);
+        $("#editSeriesName").val(result.Name);
+        $("#editIsCurrentSeries").prop("checked", result.IsCurrent);
+        $("#seriesPublisher").val(result.Publisher.Id);
+    }
+</script>
+
+<div class="Content">
+    <div class="SubSection ClearablePanel">
+        <div class="Row">
+            <div class="LabelCell RepeatingItem">
+                Series &nbsp;&nbsp;&nbsp;<input type="radio" id="onlyActiveSeries" name="activeInactiveSeries" onchange="LoadSeriesDrop()" checked="checked" value="Active"/>Active<input type="radio" id="onlyInactiveSeries" name="activeInactiveSeries" onchange="LoadSeriesDrop()" value="Inactive"/>Inactive
+            </div>
+            <div>
+                <select id="bookSeries" onchange=" SeriesSelected() "></select>
+            </div>
+        </div>
+        
+        <div id="addSeriesForBook" style="display: none;">
+            @{ Html.RenderPartial("_AddSeries"); }
+        </div>
+        <div id="editSeriesPanel" class="Content ClearablePanel" style="display: none;">
+            <div class="Row">
+                <div class="LabelCell">
+                    Series Name
+                </div>
+                <div>
+                    <input type="hidden" id="editSeriesId"/>
+                    <input type="text" id="editSeriesName"/>
+                </div>
+            </div>
+            <div class="Row">
+                <div class="LabelCell">
+                    Publisher
+                </div>
+                <div>
+                    <select id="seriesPublisher"></select>
+                </div>
+            </div>
+            <div class="Row">
+                <div class="LabelCell">
+                    Is Current
+                </div>
+                <div class="RepeatingItem">
+                    <input type="checkbox" id="editIsCurrentSeries"/>
+                </div>
+            </div>
+            
+            <div class="ButtonPanel">
+                <input type="submit" id="updateSeries" onclick=" UpdateSeries() " value="Save Series"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function UpdateSeries() {
+        var id = $("#editSeriesId").val();
+        var publisherId = $("#seriesPublisher option:selected").val();
+        var isCurrent = $("#editIsCurrentSeries").is(":checked");
+        var name = $("#editSeriesName").val();
+
+        var request = {
+            series: {
+                Id: id,
+                Name: name,
+                IsCurrent: isCurrent,
+                Publisher: {
+                    Id: publisherId
+                }
+            }
+        };
+
+        SaveSeries(request);
+        $("#bookSeries option:selected").each(function() { $(this).removeAttr("selected"); });
+        $("#bookSeries option:first").attr("selected", "selected");
+        SeriesSelected();
+        $("#bookSeries").focus();
+    }
+</script>

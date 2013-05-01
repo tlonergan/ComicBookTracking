@@ -18,10 +18,13 @@
             <nav>
                 <dl>
                     <dt>@Html.ActionLink("Want List", "Index", "WantList")</dt>
-                    <td>@Html.ActionLink("Search", "Index", "Book")</td>
+                    <dt>@Html.ActionLink("Search", "Index", "Book")</dt>
+                    <dt>@Html.ActionLink("Series", "Index", "Series")</dt>
                 </dl>
             </nav>
-            @RenderBody()
+            <div class="Content">
+                @RenderBody()
+            </div>
             <div class="DontFloatOverMe"></div>
         </div>
         

@@ -78,72 +78,74 @@
         $("#saveBookButton").focus();
     }
 </script>
+<div class="Content">
+    <div class="Content LeftNavigation">
+        <div class="SubSection">
+            <div class="Row">
+                <div class="LabelCell">
+                    Series Name
+                </div>
+                <div>
+                    <input type="text" id="searchSeriesNameField" onfocus="ClearField('searchSeriesNameField') " />
+                </div>
+            </div>
+            <div class="AlternateRow">
+                <div class="LabelCell">
+                    Issue Number
+                </div>
+                <div>
+                    <input type="text" id="searchIssueNumberField" onfocus=" ClearField('searchIssueNumberField') " />
+                </div>
+            </div>
+            <div class="Row">
+                <div class="LabelCell">Location</div>
+                <div>
+                    <select id="searchLocationNameList" onfocus=" ClearField('searchLocationNameList') "></select>
+                </div>
+            </div>
+            <div class="ButtonPanel">
+                <input type="submit" id="searchButton" value="Search Books" name="searchForm" onclick=" SearchBooks() "/>
+            </div>
+            <div class="DontFloatOverMe"></div>
+        </div>
+    
+        <div id="locationBookCountPanel" class="SubSection">
+            <h3>Inventory</h3>
+            <a href="javascript:MoveUpLocations()">Move</a>
+            <table id="locationBookCountTable" class="FullWidth">
+            </table>
+        </div>
+    </div>
 
-<div class="Content LeftNavigation">
-    <div class="SubSection">
-        <div class="Row">
-            <div class="LabelCell">
-                Series Name
-            </div>
-            <div>
-                <input type="text" id="searchSeriesNameField" onfocus="ClearField('searchSeriesNameField') " />
-            </div>
+    <div class="FloatLeft Content" style="width: auto; min-width: 800px; max-width: 1190px;">
+        <div class="SubSection ClearablePanel">
+            @{ Html.RenderPartial("_AddBook"); }
         </div>
-        <div class="AlternateRow">
-            <div class="LabelCell">
-                Issue Number
-            </div>
-            <div>
-                <input type="text" id="searchIssueNumberField" onfocus=" ClearField('searchIssueNumberField') " />
-            </div>
-        </div>
-        <div class="Row">
-            <div class="LabelCell">Location</div>
-            <div>
-                <select id="searchLocationNameList" onfocus=" ClearField('searchLocationNameList') "></select>
-            </div>
-        </div>
-        <div class="ButtonPanel">
-            <input type="submit" id="searchButton" value="Search Books" name="searchForm" onclick=" SearchBooks() "/>
+        <div id="bookSearchResultPanel" class="Content" style="display: none;">
+            <table id="bookSearchResultGrid" class="FullWidth">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td>Series</td>
+                        <td></td>
+                        <td>Issue</td>
+                        <td>Is Special Cover</td>
+                        <td>Notes</td>
+                        <td>Status</td>
+                        <td>Location</td>
+                        <td>Want Status</td>
+                        <td>Suggested Location</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
         <div class="DontFloatOverMe"></div>
     </div>
-    
-    <div id="locationBookCountPanel" class="SubSection">
-        <h3>Inventory</h3>
-        <a href="javascript:MoveUpLocations()">Move</a>
-        <table id="locationBookCountTable" class="FullWidth">
-        </table>
-    </div>
-</div>
+    <div class="DontFloatOverMe`"></div>
 
-<div class="FloatLeft Content" style="width: auto; min-width: 800px; max-width: 1190px;">
-    <div class="SubSection ClearablePanel">
-        @{ Html.RenderPartial("_AddBook"); }
-    </div>
-    <div id="bookSearchResultPanel" class="Content" style="display: none;">
-        <table id="bookSearchResultGrid" class="FullWidth">
-            <thead>
-                <tr>
-                    <td></td>
-                    <td>Series</td>
-                    <td></td>
-                    <td>Issue</td>
-                    <td>Is Special Cover</td>
-                    <td>Notes</td>
-                    <td>Status</td>
-                    <td>Location</td>
-                    <td>Want Status</td>
-                    <td>Suggested Location</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="DontFloatOverMe"></div>
 </div>
-<div class="DontFloatOverMe`"></div>
 
 @*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Templates !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
 <script id="bookSearchResultTemplate" type="text/x-jquery-tmpl">
@@ -183,10 +185,13 @@
             <a href="javascript:MoveBookFromSearchResults(${Id})" style="font-weight: bold; font-size: large;">Move</a>
         </td>
     </tr>
-    <tr id="editBookRow${Id}" style="display:none;">
+    <tr id="editBookRow${Id}" class="{{if i % 2 != 0}}AlternateRow{{/if}}" style="display:none;">
         <td></td>
         <td></td>
-        <td></td>
+        <td>
+            <input type="hidden" id="editBookId" value="${Id}"/>
+            <input type="hidden" id="bookSeriesId" value="${Series.Id}"/>
+        </td>
         <td class="SmallInput">
             <input id="issueNumberTextBox" value="${Issue}" />
         </td>
@@ -213,6 +218,7 @@
                 {{/each}}
             </select>
         </td>
+        <td></td>
         <td class="ButtonPanel">
             <input type="submit" value="Save Book" onclick="SaveExistingBook('editBookRow${Id}')" />
         </td>

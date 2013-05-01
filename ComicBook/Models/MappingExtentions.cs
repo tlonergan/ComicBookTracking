@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ComicBook.Models
@@ -37,7 +38,9 @@ namespace ComicBook.Models
                        IsSpecialCover = book.IsSpecialCover,
                        Issue = book.Issue,
                        Notes = book.Notes,
-                       SeriesId = book.Series.Id
+                       SeriesId = book.Series.Id,
+                       BookInventories = new Collection<BookInventory>{new BookInventory{InventoryStatusId = (int)book.Status}},
+                       WantLists = new Collection<WantList>{new WantList{WantListStatusId = (int)book.Want.StatusId}}
                    };
         }
 

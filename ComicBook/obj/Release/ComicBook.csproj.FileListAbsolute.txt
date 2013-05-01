@@ -38,3 +38,33 @@ C:\Users\Travis Lonergan\documents\visual studio 2012\Projects\ComicBook\ComicBo
 C:\Users\Travis Lonergan\documents\visual studio 2012\Projects\ComicBook\ComicBook\obj\Release\ComicBook.csprojResolveAssemblyReference.cache
 C:\Users\Travis Lonergan\Documents\Visual Studio 2012\Projects\ComicBook\ComicBook\bin\Nustache.Core.dll
 C:\Users\Travis Lonergan\Documents\Visual Studio 2012\Projects\ComicBook\ComicBook\bin\Nustache.Mvc3.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\ComicBook.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\ComicBook.pdb
+D:\GitHub\ComicBookTracking\ComicBook\bin\EntityFramework.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\Microsoft.Web.Infrastructure.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\Newtonsoft.Json.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\Nustache.Core.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\Nustache.Mvc3.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Net.Http.Formatting.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.Helpers.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.Http.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.Http.WebHost.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.Mvc.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.Razor.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.WebPages.Deployment.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.WebPages.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.WebPages.Razor.dll
+D:\GitHub\ComicBookTracking\ComicBook\bin\EntityFramework.xml
+D:\GitHub\ComicBookTracking\ComicBook\bin\Newtonsoft.Json.xml
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Net.Http.Formatting.xml
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.Helpers.xml
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.Http.xml
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.Http.WebHost.xml
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.Mvc.xml
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.Razor.xml
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.WebPages.xml
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.WebPages.Deployment.xml
+D:\GitHub\ComicBookTracking\ComicBook\bin\System.Web.WebPages.Razor.xml
+D:\GitHub\ComicBookTracking\ComicBook\obj\Release\ComicBook.csprojResolveAssemblyReference.cache
+D:\GitHub\ComicBookTracking\ComicBook\obj\Release\ComicBook.dll
+D:\GitHub\ComicBookTracking\ComicBook\obj\Release\ComicBook.pdb

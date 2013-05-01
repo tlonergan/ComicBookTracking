@@ -13,6 +13,18 @@ function HidePanel(panelName) {
     //Erase Fields
 }
 
+function ShowEditPanel(panelName, controlToHide, controlToShow) {
+    ShowPanel(panelName);
+    HidePanel(controlToHide);
+    ShowPanel(controlToShow);
+}
+
+function HideEditPanel(panelName, controlToHide, controlToShow) {
+    HidePanel(panelName);
+    HidePanel(controlToHide);
+    ShowPanel(controlToShow);
+}
+
 function ShowModal(panelName) {
     $("#" + panelName).dialog({ modal: true, resizable: false, draggable: false, title: "Add Book", width: 800, position: { my: "top", at: "top", of: window } });
 }
@@ -210,11 +222,16 @@ function LoadAddBooks(bookSaveFunction, templateName, templateData) {
         $("#addBookInsertablePanel").empty();
         $("#" + templateName).tmpl(templateData).appendTo("#addBookInsertablePanel");
     }
-    
+
+    GetAllSeries(false);
+}
+
+function GetAllSeries(inactive) {
     $.ajax({
         url: "Series/GetCurrentSeries",
         success: LoadSeries,
-        failure: function() { alert("Failure"); },
+        data: { inactive: inactive },
+        failure: function () { alert("Failure"); },
         type: 'GET',
         traditional: true
     });
@@ -235,7 +252,7 @@ function BookSeriesChanged() {
     var seriesName = $("#bookSeries option:selected").text();
     if (seriesName == "--- Add New Series ---") {
         $("#addSeriesForBook").show();
-        LoadAddSeriesForBook(SaveSeriesForBook);
+        GetPublishers(SaveSeriesForBook, "publisherList");
         $("#seriesNameField").focus();
     }
     else {
@@ -243,16 +260,16 @@ function BookSeriesChanged() {
     }
 }
 
-function LoadAddSeriesForBook(saveFunction) {
+function GetPublishers(saveFunction, publisherControlName) {
     $("#saveSeriesButton").click(saveFunction);
 
     $.ajax({
         url: "Publisher/GetPublishers",
         success: function(result) {
-            LoadPublishers(result, "publisherList");
+            LoadPublishers(result, publisherControlName);
         },
         failure: function() { alert("Failure"); },
-        type: 'GET',
+        type: 'GET', 
         traditional: true
     });
 }
@@ -283,18 +300,21 @@ function SaveSeriesForBook() {
         }
     };
 
+    SaveSeries(request);
+}
+
+function SaveSeries(request) {
     var stringyRequest = JSON.stringify(request);
 
     $.ajax({
         url: "Series/SaveSeries",
-        failure: function() { alert("Failure"); },
+        failure: function () { alert("Failure"); },
         success: SaveSeriesSuccess,
         data: stringyRequest,
         contentType: "application/json",
         type: "POST",
         traditional: true
     });
-
 }
 
 function SearchBooks() {
@@ -315,11 +335,13 @@ function SearchBooks() {
 function LoadBookSearch(result) {
     var books = result.returnableBooks;
     var locations = result.locations;
+    var inventoryStatus = result.InventoryStatus;
+    var wantStatus = result.wantStatuses;
     
     $("#bookSearchResultPanel").show();
     
     $("#bookSearchResultGrid tbody").empty();
-    $("#bookSearchResultTemplate").tmpl({ Books: books, Locations: locations }).appendTo("#bookSearchResultGrid tbody");
+    $("#bookSearchResultTemplate").tmpl({ Books: books, Locations: locations, InventoryStatus: inventoryStatus, WantStatuses: wantStatus }).appendTo("#bookSearchResultGrid tbody");
 }
 
 function SaveSeriesSuccess() {
@@ -413,8 +435,36 @@ function GetBookCount() {
         traditional: true
     });
 }
+
 function LoadBookSearchData(result) {
     LoadAddBooks(SaveBookFromSearch, "addBookAdditionalTemplate", { WantStatuses: result.wantStatuses, Locations: result.locations, InventoryStatus: result.inventoryStatus });
 
     $("#locationListTemplate").tmpl({ Locations: result.locations }).appendTo("#searchLocationNameList");
+}
+
+function SaveExistingBook(rowName) {
+    var row = $("#" + rowName);
+
+    var id = row.find("#editBookId").val();
+    var seriesId = row.find("#bookSeriesId").val();
+    var isChecked = row.find("#isSpecialIssueCheckbox").is(":checked");
+    var issueNumber = row.find("#issueNumberTextBox").val();
+    var notes = row.find("#notes").val();
+    var bookStatus = row.find("#statusLists option:selected").val();
+    var wantStatus = row.find("#wantStatusLists option:selected").val();
+
+    var book = { Id: id, Issue: issueNumber, IsSpecialCover: isChecked, Notes: notes, Series: { Id: seriesId }, Status: bookStatus, Want: { StatusId: wantStatus } };
+    SaveNewBook(book, function() { SearchBooks(); });
+}
+
+function GetSeries(seriesId, successFunction) {
+    $.ajax(
+        {
+            url: "Series/GetSeries",
+            success: successFunction,
+            data: { seriesId: seriesId },
+            failure: function () { alert("failure"); },
+            type: "GET",
+            traditional: true
+        });
 }
