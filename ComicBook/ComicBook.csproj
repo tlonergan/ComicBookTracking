@@ -166,6 +166,7 @@
       <DependentUpon>ComicBookStore.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="Controllers\ComicVineController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\SeriesController.cs" />
     <Compile Include="Controllers\WantListController.cs" />
@@ -283,6 +284,7 @@
     <None Include="Properties\PublishProfiles\LocalDeploy.pubxml" />
     <Content Include="Views\Book\BookSearch.cshtml" />
     <Content Include="Views\Series\EditSeries.cshtml" />
+    <Content Include="Views\ComicVine\ComicVine.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
