@@ -39,8 +39,8 @@ namespace ComicBook.Models
                        Issue = book.Issue,
                        Notes = book.Notes,
                        SeriesId = book.Series.Id,
-                       BookInventories = new Collection<BookInventory>{new BookInventory{InventoryStatusId = (int)book.Status}},
-                       WantLists = new Collection<WantList>{new WantList{WantListStatusId = (int)book.Want.StatusId}}
+                       //BookInventories = new Collection<BookInventory>{new BookInventory{InventoryStatusId = (int)book.Status}},
+                       //WantLists = new Collection<WantList>{new WantList{WantListStatusId = (int)book.Want.StatusId}}
                    };
         }
 

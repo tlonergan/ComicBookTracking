@@ -88,13 +88,15 @@ namespace ComicBook.Controllers
                 }
                 else
                 {
+                    Want want = bookToSave.Want;
+
                     existingBook.Id = book.Id;
                     existingBook.IsSpecialCover = book.IsSpecialCover;
                     existingBook.Notes = book.Notes;
                     existingBook.Issue = book.Issue;
                     existingBook.BookInventories.ForEach(
-                        bi => bi.InventoryStatusId = book.BookInventories.First().InventoryStatusId);
-                    existingBook.WantLists.ForEach(wl => wl.WantListStatusId = book.WantLists.First().WantListStatusId);
+                        bi => bi.InventoryStatusId = (int)bookToSave.Status);
+                    existingBook.WantLists.ForEach(wl => wl.WantListStatusId = want.StatusId);
                 }
                 dataStore.SaveChanges();
 
