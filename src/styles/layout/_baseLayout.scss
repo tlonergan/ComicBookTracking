@@ -1,0 +1,62 @@
+.page{
+	width: 100%;
+	padding: 0 5px;
+}
+
+.page > div{
+	margin: 5px 0;
+}
+
+.absoluteCentered{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-10%, -50%);
+}
+
+.centeringContainer{
+	text-align: center;
+}
+
+i{
+	margin-right: 5px;
+}
+
+.flex{
+	display: flex;
+	width: 100%;
+}
+
+a{
+	cursor: default;
+	text-decoration: underline;
+	color: $accentFont;
+}
+
+input,
+select{
+	width: 80%;
+	padding: 0;
+	margin: 10px 0;
+	height: 40px;
+}
+
+button{
+	margin-right: 10px;
+	color: #fff;
+	background-color: $submitButtonColor;
+	width: 175px;
+	border: 0;
+	border-radius: 5px;
+	height: 40px;
+	border: #fff 1px solid;
+}
+
+button:focus{
+	outline: 0;
+}
+
+.collapse{
+	display: none;
+}

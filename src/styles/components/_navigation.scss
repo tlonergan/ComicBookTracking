@@ -1,0 +1,42 @@
+.navigationBar{
+	padding: 10px 0;
+	background-color: $secondaryBackground;
+	margin-bottom: 15px;
+	border: 0;
+	border-bottom: 5px;
+	border-style: solid;
+	border-color: $mainAccent;
+
+	.menuButton{
+		margin-left: auto;
+		flex: 2;
+	}
+
+	button.menuButton{
+		margin: 0;
+		color: $mainFont;
+		background-color: $secondaryBackground;
+		width: auto;
+		border: 0;
+		height: auto;
+		border: 0;
+	}
+
+	.menuItem{
+			border:0;
+			border-top: 1px;
+			border-style: solid;
+			border-color: $secondaryButtonColor;
+			margin-top: 5px;
+			padding: 5px 0;
+
+		a{
+			text-decoration: none;
+			padding: 5px 20px;
+
+			i{
+				margin-right: 15px;
+			}
+		}
+	}
+}

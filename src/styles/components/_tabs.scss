@@ -1,0 +1,100 @@
+.tabContainer{
+
+	display: flex;
+	
+
+	a.tab{
+		text-decoration: none;
+	}
+
+	.tab{
+		padding: 0 10px;
+		background-color: $secondaryBackground;
+		border-radius: 5px 5px 0 0;
+		border-width: 1px;
+		border-color: #777;
+		width: auto;
+		margin-right: 5px;
+
+			@media screen and (min-width: $break-large){
+				padding: 5px 10px;
+			}
+
+			@media screen and (min-width: $break-small){
+				padding: 10px 20px;
+			}
+
+		span{
+			@media screen and (min-width: $break-medium){
+				margin: 5px 0;
+			}
+
+			@media screen and (min-width: $break-small){
+				display: none;
+			}
+
+			@media screen and (min-width: $break-large){
+				display: inline;
+				padding: 10px 10px;
+			}
+		}
+	}
+
+	.selectedTab{
+		background-color: $accentColor;
+		color: $secondaryBackground;
+		// border-radius: 5px 25px 0 0;
+	}
+}
+
+.tabPage{
+	padding: 10px;
+	border: solid;
+	border-width: 1px;
+	border-color: $accentColor;
+
+	.item{
+		background-color: #333;
+		margin-bottom: 10px;
+		padding: 0;
+		border: solid;
+		border-color: #555;
+		border-radius: 7px;
+
+		h3{
+			background-color: $mainAccent;
+			color: #fff;
+			padding: 0;
+			margin: 0;
+			margin-bottom: 5px;
+			font-weight: normal;
+		}
+
+		.tabBody{
+			margin: 15px 10px;
+		}
+
+		.itemButtons{
+			:first-child{
+				background-color: $buttonColor;
+				border-radius: 0 0 0 5px;
+			}
+
+			:last-child{
+				border-radius: 0 0 5px 0;
+			}
+
+			a{
+				width:50%;
+				background-color: $secondaryButtonColor;
+				color: #fff;
+				padding: 8px 12px;
+				font-weight: bold;
+				border-radius: 0 0 5px 5px;
+				text-decoration: none;
+				height: 40px;
+				text-align: center;
+			}
+		}
+	}
+}
