@@ -26,8 +26,16 @@ const keys = {
 		heldAtStore: 4,
 		wantedHold: 5
 	},
+	comicVineTabKeys:{
+		added: 'added'
+	},
 	startChangeStatus: "startChangeStatus",
-	cancelChangeWantStatus: "cancelChangeWantStatus"
+	cancelChangeWantStatus: "cancelChangeWantStatus",
+	comicVineGet:{
+		getting: 'gettingComicVine',
+		success: "successComicVine",
+		failure: 'failedComicVine'
+	}
 }
 
 export default keys;
