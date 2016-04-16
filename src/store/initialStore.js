@@ -9,5 +9,8 @@ export default fromJS({
 		changingStateKey: null,
 		statuses: [],
 		saving: []
+	},
+	tabs: {
+		selectedTab: null
 	}
 });

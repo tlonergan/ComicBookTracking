@@ -11,8 +11,6 @@ const NavigationBar = React.createClass({
 		this.setState({menuShown: !this.state.menuShown});
 	},
 	render: function(){
-
-		console.log('In navbar')
 		return (
 			<div className='navigationBar'>
 				<div className='flex centeringContainer'>

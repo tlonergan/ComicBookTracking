@@ -8,8 +8,6 @@ export default function wantListReducer(state = initialState.get('wantList'), ac
 			return gettingWantList(state, action);
 		case keys.wantList.success:
 			return successWantList(state, action);
-		case keys.wantListTabClicked.clicked:
-			return wantListTabClicked(state, action);
 		case keys.startChangeStatus:
 			return startChangeStatus(state, action);
 		case keys.cancelChangeWantStatus:
@@ -46,11 +44,6 @@ function successWantList(state, action){
 	wantLists = _.sortBy(wantLists, function(item){return item.Book.Series.Name;});
 	let newState = state.set('lists', wantLists);
 	newState = newState.set('isRetrieving', false);
-	return newState;
-}
-
-function wantListTabClicked(state, action){
-	let newState = state.set('selectedTab', action.payload);
 	return newState;
 }
 

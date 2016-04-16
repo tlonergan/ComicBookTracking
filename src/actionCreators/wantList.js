@@ -3,13 +3,6 @@ import {CALL_API} from 'redux-api-middleware';
 import {jsonHeaders} from '../core/api';
 import keys from '../core/keys';
 
-export function clickTab(tabName){
-	return {
-		type: keys.wantListTabClicked.clicked,
-		payload: tabName
-	}
-}
-
 export function getWantList(wantListStatusId){
 	return function getWantListThunk(dispatch, getState){
 		return dispatch({

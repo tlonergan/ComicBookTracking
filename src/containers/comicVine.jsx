@@ -6,7 +6,7 @@ const ComicVine = React.createClass({
 	render: function(){
 		return (
 			<div>
-				Coming Soon?
+				Coming soon as soon as you break out the tabs
 			</div>
 		);
 	}

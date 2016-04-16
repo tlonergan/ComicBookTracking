@@ -9,7 +9,7 @@ const Wants = React.createClass({
   	if(this.props.lists == null){
   		return (<p className='error'>Unable to retrieve list</p>);
   	}
-  	2
+  	
 	let wantList = this.props.lists;
     return (
     	<div>

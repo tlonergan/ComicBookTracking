@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import {toJS} from 'immutable';
 
 import Wants from '../components/wants';
-import {getWantList, clickTab, getWantListStatuses} from '../actionCreators/wantList';
+import Tabs from '../components/tabs';
+import {getWantList, getWantListStatuses} from '../actionCreators/wantList';
+import {clickTab} from '../actionCreators/tabs';
 import keys from '../core/keys';
 
 const wantList = React.createClass({
@@ -43,29 +45,19 @@ const wantList = React.createClass({
 				);
 		}
 		else{
+			var tabs = [
+				{name: keys.wantListStatusIds.wanted, display: 'Wants', icon: 'fa-cart-plus'},
+				{name: keys.wantListStatusIds.heldAtStore, display: 'Held At Store', icon: 'fa-hand-paper-o'},
+				{name: keys.wantListStatusIds.wantedHold, display: 'Wanted Hold', icon: 'fa-balance-scale'},
+				{name: keys.wantListStatusIds.backIssue, display: 'Back Issue', icon: 'fa-star'}
+			];
+
 			return (
 				<div>
-					<div className='tabContainer'>
-						<a className={'tab' + (selectedTab === keys.wantListStatusIds.wanted ? ' selectedTab' : '')} 
-						   onClick={(e) => {this.handleTabClicked(e, keys.wantListStatusIds.wanted);}}>
-							<i className='fa fa-cart-plus'></i><span>Wants</span>
-						</a>
-						<a className={'tab' + (selectedTab === keys.wantListStatusIds.heldAtStore ? ' selectedTab' : '')}
-						   onClick={(e) => {this.handleTabClicked(e, keys.wantListStatusIds.heldAtStore);}}>
-							<i className='fa fa-hand-paper-o'></i>Held At Store
-						</a>
-						<a className={'tab' + (selectedTab === keys.wantListStatusIds.wantedHold ? ' selectedTab' : '')}
-						   onClick={(e) => {this.handleTabClicked(e, keys.wantListStatusIds.wantedHold);}}>
-							<i className='fa fa-balance-scale'></i>Wanted Hold
-						</a>
-						<a className={'tab' + (selectedTab === keys.wantListStatusIds.backIssue ? ' selectedTab' : '')}
-						   onClick={(e) => {this.handleTabClicked(e, keys.wantListStatusIds.backIssue);}}>
-							<i className='fa fa-star'></i>Back Issues
-						</a>
-					</div>
+					<Tabs tabDefinitions={tabs} clickMethod={this.handleTabClicked}/>
 					<div className='tabPage'>
-						<Wants lists={this.props.wantList.lists} 
-							reload={this.loadWantList} 
+						<Wants lists={this.props.wantList.lists}
+							reload={this.loadWantList}
 							wantStatuses={this.props.wantList.statuses}/>
 					</div>
 				</div>
