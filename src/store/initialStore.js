@@ -10,7 +10,11 @@ export default fromJS({
 		statuses: [],
 		saving: []
 	},
-	tabs: {
+	tab: {
 		selectedTab: null
+	},
+	comicVine:{
+		comicVineBooks: [],
+		isRetrieving: false	
 	}
 });

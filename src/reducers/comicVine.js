@@ -1,7 +1,7 @@
 import keys from '../core/keys';
 import initialState from '../store/initialStore';
 
-export default comicVineReducer(state = initialState.get('tab'), action){
+export default function comicVineReducer(state = initialState.get('comicVine'), action){
   switch (action.type) {
     case keys.comicVineGet.getting:
       return gettingComicVineBooks(state, action);
@@ -18,9 +18,7 @@ function gettingComicVineBooks(state, action){
 }
 
 function successComicVineBooks(state, action){
-  console.log(action.payload)
-
-  let newState.set('comicVineBooks', action.payload);
+  let newState = state.set('comicVineBooks', action.payload);
   newState = newState.set('isRetrieving', false);
   return newState;
 }
