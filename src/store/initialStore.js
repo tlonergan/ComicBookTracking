@@ -14,7 +14,8 @@ export default fromJS({
 		selectedTab: null
 	},
 	comicVine:{
-		comicVineBooks: [],
-		isRetrieving: false	
+		comicVineBooks: null,
+		isRetrieving: false,
+		shownPublisher: null
 	}
 });

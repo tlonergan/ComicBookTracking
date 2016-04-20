@@ -24,8 +24,20 @@ i{
 }
 
 .flex{
+	@extend .fullWidthPanel;
 	display: flex;
+}
+
+.fullWidthPanel{
 	width: 100%;
+}
+
+.flex .oneThirdPanel{
+	width: 33.33%;
+}
+
+.flex .twoThirdsPanel{
+	width: 66.66%;
 }
 
 a{
@@ -59,4 +71,18 @@ button:focus{
 
 .collapse{
 	display: none;
+}
+
+.headerButton{
+	display: inline-block;;
+	width: 100%;
+	height: 100%;
+
+	&.collapsed{
+		background-color: darken($mainAccent, 25%)
+	}
+
+	&.expanded{
+		background-color: $mainAccent
+	}
 }

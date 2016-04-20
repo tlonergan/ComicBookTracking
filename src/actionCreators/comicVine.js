@@ -25,3 +25,11 @@ export function getComicVineBooks(){
 		});
 	}
 }
+
+export function showPublisher(publisherKey){
+	console.log('in ac');
+		return {
+			type: keys.comicVine.showPublisher,
+			payload: publisherKey
+		};
+}

@@ -9,7 +9,7 @@ export default function wantListReducer(state = initialState.get('wantList'), ac
 		case keys.wantList.success:
 			return successWantList(state, action);
 		case keys.startChangeStatus:
-			return startChangeStatus(state, action);
+			return 1(state, action);
 		case keys.cancelChangeWantStatus:
 			return cancelChangeWantStatus(state, action);
 		case keys.wantListStatus.getting:

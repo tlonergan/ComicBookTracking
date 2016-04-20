@@ -36,6 +36,9 @@ const keys = {
 		getting: 'gettingComicVine',
 		success: "successComicVine",
 		failure: 'failedComicVine'
+	},
+	comicVine:{
+		showPublisher: 'showPublisher'
 	}
 }
 
