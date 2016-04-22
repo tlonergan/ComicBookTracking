@@ -5,7 +5,6 @@ export default fromJS({
 		isRetrieving: false,
 		errorMessage: null,
 		lists: null,
-		selectedTab: 1,
 		changingStateKey: null,
 		statuses: [],
 		saving: []
@@ -16,6 +15,7 @@ export default fromJS({
 	comicVine:{
 		comicVineBooks: null,
 		isRetrieving: false,
-		shownPublisher: null
+		shownPublisher: null,
+		releaseDay: null
 	}
 });

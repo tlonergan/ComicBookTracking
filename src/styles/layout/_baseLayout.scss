@@ -3,7 +3,8 @@
 	padding: 0 5px;
 }
 
-.page > div{
+.page > div,
+.section{
 	margin: 5px 0;
 }
 
@@ -84,5 +85,13 @@ button:focus{
 
 	&.expanded{
 		background-color: $mainAccent
+	}
+}
+
+.largeOnly{
+	display: none;
+
+	@media screen and (min-width: $break-large){
+		display: inherit;
 	}
 }

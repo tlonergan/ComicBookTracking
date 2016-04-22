@@ -24,20 +24,7 @@ body{
 }
 
 body div{
-	width: 90%;
+	width: auto;
 	margin: auto;
 	padding:auto;
-
-
-	@media screen and (min-width: $break-small){
-		width: 100%;
-	}
-
-	@media screen and (min-width: $break-medium){
-		width: 100%;
-	}
-
-	@media screen and (min-width: $break-large){
-		width: 100%;
-	}
 }

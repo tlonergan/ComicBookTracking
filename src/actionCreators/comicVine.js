@@ -4,16 +4,29 @@ import moment from 'moment';
 import {jsonHeaders} from '../core/api';
 import keys from '../core/keys';
 
-export function getComicVineBooks(){
+export function getComicVineBooks(releaseDay, weekAdjustment){
 	return function getWantListThunk(dispatch, getState){
-		let currentDate = moment();
+		if(!releaseDay){
+			releaseDay = moment();
+		}
+
+		if(!weekAdjustment){
+			weekAdjustment = 0;
+		}
+
 		let dateAdjustment = 3 - 7;
-		if(currentDate.day() == 3)
+		if(releaseDay.day() == 3){
 			dateAdjustment = 3;
+		}
+
+		releaseDay = releaseDay.day(dateAdjustment);
+		releaseDay = releaseDay.add(weekAdjustment, 'w');
+
+		dispatch(setCurrentReleaseDay(releaseDay));
 
 		return dispatch({
 			[CALL_API]: {
-				endpoint: keys.endpoint + 'comicVine?releaseDay=' + currentDate.day(dateAdjustment).format(),
+				endpoint: keys.endpoint + 'comicVine?releaseDay=' + releaseDay.format(),
 				method: 'GET',
 				headers: jsonHeaders,
 				types: [
@@ -26,8 +39,14 @@ export function getComicVineBooks(){
 	}
 }
 
+function setCurrentReleaseDay(releaseDay){
+	return {
+		type: keys.comicVine.setReleaseDay,
+		payload: releaseDay
+	}
+}
+
 export function showPublisher(publisherKey){
-	console.log('in ac');
 		return {
 			type: keys.comicVine.showPublisher,
 			payload: publisherKey

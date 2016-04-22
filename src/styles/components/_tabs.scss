@@ -1,7 +1,7 @@
 .tabContainer{
 
 	display: flex;
-	
+
 
 	a.tab{
 		text-decoration: none;
@@ -75,6 +75,8 @@
 		}
 
 		.itemButtons{
+			@extend flex;
+			
 			:first-child{
 				background-color: $buttonColor;
 				border-radius: 0 0 0 5px;

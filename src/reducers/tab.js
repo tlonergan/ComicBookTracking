@@ -2,7 +2,7 @@ import keys from '../core/keys';
 import initialState from '../store/initialStore';
 import _ from 'lodash';
 
-export default function tabReducer(state = initialState.get('wantList'), action){
+export default function tabReducer(state = initialState.get('tab'), action){
   switch(action.type){
     case keys.wantListTabClicked.clicked:
       return wantListTabClicked(state, action);

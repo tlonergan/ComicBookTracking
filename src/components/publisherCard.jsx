@@ -9,19 +9,18 @@ const PublisherCard = React.createClass({
   handleShowPublisher: function(e, publisherId){
     if(e)
       e.preventDefault();
- console.log('in handler')
-      showPublisher(publisherId);
+
+      this.props.dispatch(showPublisher(publisherId));
   },
   render: function(){
     let publisher = this.props.publisher;
-    let isShownPublisher = this.props.shownPublisher === publisher.key;
-
+    let isShownPublisher = this.props.shownPublisher === publisher.Key;
     return (
-      <div>
+      <div className='item'>
         <div>
           <a className={'headerButton' + (isShownPublisher ? ' expanded' : ' collapsed')} onClick={(e) => {this.handleShowPublisher(e, publisher.Key)}}>{publisher.Key}</a>
         </div>
-        <div id={publisher.Key}>
+        <div id={publisher.Key} className='tabBody'>
           {isShownPublisher ?
               publisher.Value.map(book =>{
               return(

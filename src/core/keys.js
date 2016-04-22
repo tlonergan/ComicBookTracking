@@ -28,7 +28,9 @@ const keys = {
 		wantedHold: 5
 	},
 	comicVineTabKeys:{
-		added: 'added'
+		added: 'added',
+		attached: 'attached',
+		unattached: 'unattached'
 	},
 	startChangeStatus: "startChangeStatus",
 	cancelChangeWantStatus: "cancelChangeWantStatus",
@@ -38,7 +40,8 @@ const keys = {
 		failure: 'failedComicVine'
 	},
 	comicVine:{
-		showPublisher: 'showPublisher'
+		showPublisher: 'showPublisher',
+		setReleaseDay: 'setReleaseDay'
 	}
 }
 
