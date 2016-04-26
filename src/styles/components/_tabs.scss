@@ -76,7 +76,7 @@
 
 		.itemButtons{
 			@extend flex;
-			
+
 			:first-child{
 				background-color: $buttonColor;
 				border-radius: 0 0 0 5px;
@@ -84,6 +84,11 @@
 
 			:last-child{
 				border-radius: 0 0 5px 0;
+			}
+
+			a:only-child{
+				width: 100%;
+				border-radius: 0 0 5px 5px;
 			}
 
 			a{

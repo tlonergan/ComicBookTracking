@@ -4,6 +4,7 @@ import {toJS} from 'immutable';
 
 import {startChangeWantStatus, cancelChangeWantStatus, saveStatusChange} from '../actionCreators/wantList';
 import keys from '../core/keys';
+import Card from './card';
 
 const WantItem = React.createClass({
 	cancelChangeStatus(e){
@@ -62,6 +63,14 @@ const WantItem = React.createClass({
 				</div>
 				);
 		}
+
+		let cardInfo = {
+			title: item.Book.Series.Name + ' #' + item.Book.Issue,
+			buttons: [
+				{display: 'Bought', click: () => {this.saveStatusChange(keys.wantListStatusIds.recieved)}},
+				{display: 'Hold', click: () => {this.saveStatusChange(keys.wantListStatusIds.heldAtStore)}}
+			]
+		};
 
 		return (
 			<div className='item'>

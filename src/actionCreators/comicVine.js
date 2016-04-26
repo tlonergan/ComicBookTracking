@@ -52,3 +52,24 @@ export function showPublisher(publisherKey){
 			payload: publisherKey
 		};
 }
+
+export function addSeries(series){
+	return function addSeriesThunk(dispatch, getState){
+		console.log('adding Series, series: ');
+		console.log(series)
+		
+		return dispatch({
+			[CALL_API]: {
+				endpoint: keys.endpoint + 'series',
+				method: 'POST',
+				headers: jsonHeaders,
+				body: series,
+				types: [
+					keys.addSeries.getting,
+					keys.addSeries.success,
+					keys.addSeries.failure
+				]
+			}
+		});
+	}
+}

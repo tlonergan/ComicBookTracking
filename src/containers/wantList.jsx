@@ -17,7 +17,8 @@ const wantList = React.createClass({
 		this.props.dispatch(getWantListStatuses());
 	},
 	componentDidMount: function(){
-		this.loadWantList()
+		let selectedTab = this.props.tab.selectedTab ? this.props.tab.selectedTab : keys.wantListStatusIds.wanted;
+		this.loadWantList(selectedTab)
 	},
 	handleTabClicked(e, statusId){
 		if(e)
@@ -29,12 +30,12 @@ const wantList = React.createClass({
 	},
 	loadWantList: function(statusId){
 		if(!statusId)
-			statusId = this.props.wantList.selectedTab;
+			statusId = this.props.tab.selectedTab;
 
 		this.props.dispatch(getWantList(statusId));
 	},
 	render: function(){
-		let selectedTab = this.props.wantList.selectedTab;
+		let selectedTab = this.props.tab.selectedTab;
 		let tabPage = null;
 
 		if(this.props.wantList.isRetrieving){
@@ -68,7 +69,8 @@ const wantList = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    wantList: state.get('wantList').toJS()
+    wantList: state.get('wantList').toJS(),
+		tab: state.get('tab').toJS()
   };
 }
 

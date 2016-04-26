@@ -11,6 +11,12 @@ export default function comicVineReducer(state = initialState.get('comicVine'), 
       return showPublisher(state, action);
     case keys.comicVine.setReleaseDay:
       return setReleaseDay(state, action);
+		case keys.addSeries.getting:
+      return startingSeriesAdd(state, action);
+		case keys.addSeries.success:
+      return successfulSeriesAdd(state, action);
+		case keys.addSeries.failure:
+      return failureSeriesAdd(state, action);
     default:
       return state;
   }
@@ -35,4 +41,19 @@ function showPublisher(state, action){
 function setReleaseDay(state, action){
   let newState = state.set('releaseDay', action.payload);
   return newState;
+}
+
+function startingSeriesAdd(state, action){
+  let newState = state.set('isRetrieving', true);
+  return newState;
+}
+
+function successfulSeriesAdd(state, action){
+  let newState = state.set('isRetrieving', false);
+  return newState;
+}
+
+function failure(state, action){
+  console.log('failure')
+  return state;
 }

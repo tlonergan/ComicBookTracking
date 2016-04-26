@@ -42,6 +42,11 @@ const keys = {
 	comicVine:{
 		showPublisher: 'showPublisher',
 		setReleaseDay: 'setReleaseDay'
+	},
+	addSeries:{
+		getting: 'addSeriesGet',
+		success: 'addSeriesSuccess',
+		failure: 'addSeriesFailure'
 	}
 }
 

@@ -71,7 +71,9 @@ const ComicVine = React.createClass({
 		}
 
 		if(!publishers){
-			return fetchingMessage;
+			return (<div>
+				Could not retreive Comic Vine Books
+			</div>);
 		}
 
 		return(
@@ -91,7 +93,7 @@ const ComicVine = React.createClass({
 				<div className='tabPage'>
 					{publishers.map(publisher =>{
 						return (
-							<PublisherCard key={publisher.Key} publisher={publisher} shownPublisher={this.props.comicVine.shownPublisher} />
+							<PublisherCard key={publisher.Key} publisher={publisher} shownPublisher={this.props.comicVine.shownPublisher} selectedTab={shownTabKey} />
 						);
 					})}
 				</div>

@@ -9,7 +9,7 @@ export default function wantListReducer(state = initialState.get('wantList'), ac
 		case keys.wantList.success:
 			return successWantList(state, action);
 		case keys.startChangeStatus:
-			return 1(state, action);
+			return startChangeStatus(state, action);
 		case keys.cancelChangeWantStatus:
 			return cancelChangeWantStatus(state, action);
 		case keys.wantListStatus.getting:
@@ -67,8 +67,6 @@ function successWantListStatus(state, action){
 }
 
 function gettingWantListSave(state, action){
-	console.log(action);
-	console.log(state);
 	return state;
 }
 
