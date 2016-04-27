@@ -60,8 +60,6 @@ function successfulSeriesAdd(state, action){
 }
 
 function failureSeriesAdd(state, action){
-  console.log('failure')
-  console.log(action)
   let newState = state.set('isRetrieving', false);
   return newState;
 }
@@ -72,16 +70,14 @@ function startingSeriesGet(state, action){
 }
 
 function successfulSeriesGet(state, action){
-  console.log('successful get')
-  console.log(action.payload)
+  console.log('In successful Get Series Reducer');
+  console.log(action.payload);
   let newState = state.set('isRetrieving', false);
   newState = newState.set('currentSeries', action.payload);
   return newState;
 }
 
 function failureSeriesGet(state, action){
-  console.log('failure')
-  console.log(action)
   let newState = state.set('isRetrieving', false);
   return newState;
 }

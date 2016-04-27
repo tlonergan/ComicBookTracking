@@ -54,60 +54,32 @@ export function showPublisher(publisherKey){
 		};
 }
 
-export function addSeries(series, volumeId){
-	return function addSeriesThunk(dispatch, getState){
-		console.log('adding Series, series: ');
-		console.log(series)
-		
-		dispatch({
+export function attachCurrentSeries(volumeId){
+	return function attachCurrentSeriesThunk(dispatch, getState){
+		let state = getState();
+		console.log(state);
+		let comicVineState = state.get('comicVine').toJS();
+		console.log(comicVineState);
+		let currentSeries = comicVineState.currentSeries;
+		console.log(currentSeries);
+
+		return dispatch({
 			[CALL_API]: {
-				endpoint: keys.endpoint + 'series',
+				endpoint: keys.endpoint + 'comicVine',
 				method: 'POST',
 				headers: jsonHeaders,
-				body: JSON.stringify(series),
+				body: JSON.stringify({
+					seriesId: currentSeries.Id,
+					volumeId: volumeId
+				}),
 				types: [
-					keys.addSeries.getting,
-					keys.addSeries.success,
-					keys.addSeries.failure
+					keys.comicVineAttachSeries.getting,
+					keys.comicVineAttachSeries.success,
+					keys.comicVineAttachSeries.failure
 				]
 			}
-		}).then(() => {
-			dispatch({
-				[CALL_API]: {
-					endpoint: keys.endpoint + 'series?name=' + escape(series.Name),
-					method: 'GET',
-					headers: jsonHeaders,
-					types: [
-						keys.getSeries.getting,
-						keys.getSeries.success,
-						keys.getSeries.failure
-					]
-				}
-			}).then(()=>{ 	
-
-				console.log('in third api call')
-				var comicVineState = getState().get('comicVine').toJS();
-
-				console.log(comicVineState)
-
-
-				dispatch({
-					[CALL_API]: {
-						endpoint: keys.endpoint + 'comicVine',
-						method: 'POST',
-						headers: jsonHeaders,
-						body: JSON.stringify({
-							seriesId: comicVineState.currentSeries.Id,
-							volumeId: volumeId
-						}),
-						types: [
-							keys.comicVineAttachSeries.getting,
-							keys.comicVineAttachSeries.success,
-							keys.comicVineAttachSeries.failure
-						]
-					}
-				}).then(()=> {dispatch(getComicVineBooks())});
-			});
-		});
+		}).then(()=> {dispatch(getComicVineBooks())});
 	}
 }
+
+export

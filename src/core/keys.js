@@ -1,7 +1,7 @@
 const keys = {
 	// endpoint: 'http://comicbook-env.us-west-2.elasticbeanstalk.com/api/',
-	endpoint: 'http://localhost:58010/api/',
-	// endpoint: 'http://comicbookservices-test.us-west-2.elasticbeanstalk.com/api/',
+	// endpoint: 'http://localhost:58010/api/',
+	endpoint: 'http://comicbookservices-test.us-west-2.elasticbeanstalk.com/api/',
 	wantList: {
 		getting: "GettingWantList",
 		success: "SuccessWantList",

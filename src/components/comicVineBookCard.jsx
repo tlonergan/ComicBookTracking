@@ -4,28 +4,43 @@ import {toJS} from 'immutable';
 
 import Card from './card';
 import keys from '../core/keys';
-import {addSeries} from '../actionCreators/comicVine';
+import {attachCurrentSeries} from '../actionCreators/comicVine';
+import {getSeriesByName, createSeries} from '../actionCreators/series';
 
 const ComicVineBookCard = React.createClass({
-  handleAddSeriesClick: function(){
+  handleAddBookClick: function(){
 
   },
-  handleAttachSeriesClick: function(){
-
+  handleAttachSeriesClick: function(book){
+    let dispatch = this.props.dispatch;
+    dispatch(getSeriesByName(this.getSeriesName(book)))
+      .then(() => {
+        dispatch(attachCurrentSeries(book.volume.id));
+      });
   },
   handleCreateSeriesClick: function(book){
-
-    console.log('in base handler');
-    this.props.dispatch(addSeries(
+    let dispatch = this.props.dispatch;
+    let newSeriesName = this.getSeriesName(book);
+    dispatch(createSeries(
       {
-        Name: book.volume.name + ' (' + book.volume.start_year + ')',
+        Name: newSeriesName,
         IsCurrent: true,
         Publisher: {
           Name: book.volume.publisherName
         }
       },
       book.volume.id
-    ));
+    )).then(() => {
+      this.handleAttachSeriesClick(book)
+    });
+  },
+  handleChooseSeriesClick: function(){
+    let dispatch = this.props.dispatch;
+    dispatch(showSeriesSelector());
+    dispatch(getAllUnattachedSeries());
+  }
+  getSeriesName(book){
+    return book.volume.name + ' (' + book.volume.start_year + ')';
   },
   render: function(){
     let book = this.props.book;
@@ -34,19 +49,25 @@ const ComicVineBookCard = React.createClass({
     switch (this.props.selectedTab){
       case keys.comicVineTabKeys.unattached:
         buttons = [
-          {display: 'Attach', click: this.handleAttachSeriesClick},
+          {
+            display: 'Choose series',
+            click: () => {this.handleChooseSeriesClick(this.props.key); }},
           {
             display: 'Create',
             click: () => {
               this.handleCreateSeriesClick(book);
-              console.log('click handler!')
             }
           }
         ];
         break;
       case keys.comicVineTabKeys.attached:
         buttons = [
-          {display: 'Want', click: this.handleAddSeriesClick}
+          {
+            display: 'Want',
+            click: () =>{
+              this.handleAddBookClick(book);
+            }
+          }
         ]
       break;
     }
