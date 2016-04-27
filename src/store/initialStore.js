@@ -16,6 +16,7 @@ export default fromJS({
 		comicVineBooks: null,
 		isRetrieving: false,
 		shownPublisher: null,
-		releaseDay: null
+		releaseDay: null,
+		currentSeries: null
 	}
 });

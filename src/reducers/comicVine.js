@@ -17,6 +17,12 @@ export default function comicVineReducer(state = initialState.get('comicVine'), 
       return successfulSeriesAdd(state, action);
 		case keys.addSeries.failure:
       return failureSeriesAdd(state, action);
+    case keys.getSeries.getting:
+      return startingSeriesGet(state, action);
+    case keys.getSeries.success:
+      return successfulSeriesGet(state, action);
+    case keys.getSeries.failure:
+      return failureSeriesGet(state, action);
     default:
       return state;
   }
@@ -53,7 +59,29 @@ function successfulSeriesAdd(state, action){
   return newState;
 }
 
-function failure(state, action){
+function failureSeriesAdd(state, action){
   console.log('failure')
-  return state;
+  console.log(action)
+  let newState = state.set('isRetrieving', false);
+  return newState;
+}
+
+function startingSeriesGet(state, action){
+  let newState = state.set('isRetrieving', true);
+  return newState;
+}
+
+function successfulSeriesGet(state, action){
+  console.log('successful get')
+  console.log(action.payload)
+  let newState = state.set('isRetrieving', false);
+  newState = newState.set('currentSeries', action.payload);
+  return newState;
+}
+
+function failureSeriesGet(state, action){
+  console.log('failure')
+  console.log(action)
+  let newState = state.set('isRetrieving', false);
+  return newState;
 }

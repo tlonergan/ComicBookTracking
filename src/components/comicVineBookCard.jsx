@@ -23,7 +23,8 @@ const ComicVineBookCard = React.createClass({
         Publisher: {
           Name: book.volume.publisherName
         }
-      }
+      },
+      book.volume.id
     ));
   },
   render: function(){

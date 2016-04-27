@@ -1,5 +1,6 @@
 import {CALL_API} from 'redux-api-middleware';
 import moment from 'moment';
+import {toJS} from 'immutable';
 
 import {jsonHeaders} from '../core/api';
 import keys from '../core/keys';
@@ -53,23 +54,60 @@ export function showPublisher(publisherKey){
 		};
 }
 
-export function addSeries(series){
+export function addSeries(series, volumeId){
 	return function addSeriesThunk(dispatch, getState){
 		console.log('adding Series, series: ');
 		console.log(series)
 		
-		return dispatch({
+		dispatch({
 			[CALL_API]: {
 				endpoint: keys.endpoint + 'series',
 				method: 'POST',
 				headers: jsonHeaders,
-				body: series,
+				body: JSON.stringify(series),
 				types: [
 					keys.addSeries.getting,
 					keys.addSeries.success,
 					keys.addSeries.failure
 				]
 			}
+		}).then(() => {
+			dispatch({
+				[CALL_API]: {
+					endpoint: keys.endpoint + 'series?name=' + escape(series.Name),
+					method: 'GET',
+					headers: jsonHeaders,
+					types: [
+						keys.getSeries.getting,
+						keys.getSeries.success,
+						keys.getSeries.failure
+					]
+				}
+			}).then(()=>{ 	
+
+				console.log('in third api call')
+				var comicVineState = getState().get('comicVine').toJS();
+
+				console.log(comicVineState)
+
+
+				dispatch({
+					[CALL_API]: {
+						endpoint: keys.endpoint + 'comicVine',
+						method: 'POST',
+						headers: jsonHeaders,
+						body: JSON.stringify({
+							seriesId: comicVineState.currentSeries.Id,
+							volumeId: volumeId
+						}),
+						types: [
+							keys.comicVineAttachSeries.getting,
+							keys.comicVineAttachSeries.success,
+							keys.comicVineAttachSeries.failure
+						]
+					}
+				}).then(()=> {dispatch(getComicVineBooks())});
+			});
 		});
 	}
 }
