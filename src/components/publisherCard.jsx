@@ -24,7 +24,7 @@ const PublisherCard = React.createClass({
           {isShownPublisher ?
               publisher.Value.map(book =>{
               return(
-                <ComicVineBookCard book={book} key={book.volume.name} selectedTab={this.props.selectedTab}/>
+                <ComicVineBookCard book={book} key={book.volume.name} selectedTab={this.props.selectedTab} showSeries={this.props.showSeries}/>
               )})
             : ''
         }

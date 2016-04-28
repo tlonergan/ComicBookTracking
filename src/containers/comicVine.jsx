@@ -93,7 +93,7 @@ const ComicVine = React.createClass({
 				<div className='tabPage'>
 					{publishers.map(publisher =>{
 						return (
-							<PublisherCard key={publisher.Key} publisher={publisher} shownPublisher={this.props.comicVine.shownPublisher} selectedTab={shownTabKey} />
+							<PublisherCard key={publisher.Key} publisher={publisher} shownPublisher={this.props.comicVine.shownPublisher} selectedTab={shownTabKey} showSeries={this.props.comicVine.showSeriesSelector} />
 						);
 					})}
 				</div>

@@ -11,18 +11,10 @@ export default function comicVineReducer(state = initialState.get('comicVine'), 
       return showPublisher(state, action);
     case keys.comicVine.setReleaseDay:
       return setReleaseDay(state, action);
-		case keys.addSeries.getting:
-      return startingSeriesAdd(state, action);
-		case keys.addSeries.success:
-      return successfulSeriesAdd(state, action);
-		case keys.addSeries.failure:
-      return failureSeriesAdd(state, action);
-    case keys.getSeries.getting:
-      return startingSeriesGet(state, action);
-    case keys.getSeries.success:
-      return successfulSeriesGet(state, action);
-    case keys.getSeries.failure:
-      return failureSeriesGet(state, action);
+    case keys.comicVine.showSeriesSelector:
+      return showSeriesSelector(state, action);
+    case keys.comicVineAttachSeries.success:
+      return successAttachSeries(state, action);
     default:
       return state;
   }
@@ -49,35 +41,11 @@ function setReleaseDay(state, action){
   return newState;
 }
 
-function startingSeriesAdd(state, action){
-  let newState = state.set('isRetrieving', true);
+function showSeriesSelector(state, action){
+  let newState = state.set('showSeriesSelector', action.payload);
   return newState;
 }
 
-function successfulSeriesAdd(state, action){
-  let newState = state.set('isRetrieving', false);
-  return newState;
-}
-
-function failureSeriesAdd(state, action){
-  let newState = state.set('isRetrieving', false);
-  return newState;
-}
-
-function startingSeriesGet(state, action){
-  let newState = state.set('isRetrieving', true);
-  return newState;
-}
-
-function successfulSeriesGet(state, action){
-  console.log('In successful Get Series Reducer');
-  console.log(action.payload);
-  let newState = state.set('isRetrieving', false);
-  newState = newState.set('currentSeries', action.payload);
-  return newState;
-}
-
-function failureSeriesGet(state, action){
-  let newState = state.set('isRetrieving', false);
-  return newState;
+function successAttachSeries(state, action){
+  let newState = state.set('showSeriesSelector', null);
 }

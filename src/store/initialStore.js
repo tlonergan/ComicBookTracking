@@ -18,5 +18,10 @@ export default fromJS({
 		shownPublisher: null,
 		releaseDay: null,
 		currentSeries: null
+	},
+	series:{
+		isRetrieving: false,
+		currentSeries: null,
+		unattachedSeries: []
 	}
 });

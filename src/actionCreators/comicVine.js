@@ -37,14 +37,14 @@ export function getComicVineBooks(releaseDay, weekAdjustment){
 				]
 			}
 		});
-	}
+	};
 }
 
 function setCurrentReleaseDay(releaseDay){
 	return {
 		type: keys.comicVine.setReleaseDay,
 		payload: releaseDay
-	}
+	};
 }
 
 export function showPublisher(publisherKey){
@@ -57,11 +57,10 @@ export function showPublisher(publisherKey){
 export function attachCurrentSeries(volumeId){
 	return function attachCurrentSeriesThunk(dispatch, getState){
 		let state = getState();
-		console.log(state);
-		let comicVineState = state.get('comicVine').toJS();
-		console.log(comicVineState);
+		let comicVineState = state.get('series').toJS();
 		let currentSeries = comicVineState.currentSeries;
-		console.log(currentSeries);
+		console.log('action')
+		console.log(currentSeries)
 
 		return dispatch({
 			[CALL_API]: {
@@ -79,7 +78,12 @@ export function attachCurrentSeries(volumeId){
 				]
 			}
 		}).then(()=> {dispatch(getComicVineBooks())});
-	}
+	};
 }
 
-export
+export function showSeriesSelector(cardKey){
+	return {
+		type: keys.comicVine.showSeriesSelector,
+		payload: cardKey
+	};
+}
