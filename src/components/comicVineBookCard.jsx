@@ -7,10 +7,11 @@ import SeriesSelector from './seriesSelector';
 import keys from '../core/keys';
 import {attachCurrentSeries, showSeriesSelector} from '../actionCreators/comicVine';
 import {getSeriesByName, createSeries} from '../actionCreators/series';
+import {addComicVineBook} from '../actionCreators/book';
 
 const ComicVineBookCard = React.createClass({
-  handleAddBookClick: function(){
-
+  handleAddBookClick: function(book){
+    this.props.dispatch(addComicVineBook(book));
   },
   handleAttachSeriesClick: function(book){
     let dispatch = this.props.dispatch;
