@@ -21,9 +21,6 @@ const ComicVineBookCard = React.createClass({
       });
   },
   attachBookToExistingSeries: function(book){
-    console.log('cvb handler')
-    console.log(book);
-
     let dispatch = this.props.dispatch;
     dispatch(attachCurrentSeries(book.volume.id));
   },

@@ -17,8 +17,10 @@ const wantList = React.createClass({
 		this.props.dispatch(getWantListStatuses());
 	},
 	componentDidMount: function(){
-		let selectedTab = this.props.tab.selectedTab ? this.props.tab.selectedTab : keys.wantListStatusIds.wanted;
-		this.loadWantList(selectedTab)
+		let selectedTab = keys.wantListStatusIds.wanted;
+		this.props.dispatch(clickTab(selectedTab)).then(() => {
+			this.loadWantList(selectedTab);
+		});
 	},
 	handleTabClicked(e, statusId){
 		if(e)

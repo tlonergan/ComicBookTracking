@@ -9,8 +9,6 @@ const SeriesSelector = React.createClass({
     this.props.dispatch(getAllUnattachedSeries());
   },
   handleSeriesSelected: function(e){
-    console.log('selector handler')
-    console.log(e.target.value)
     this.props.dispatch(getSeries(e.target.value));
   },
   render: function(){

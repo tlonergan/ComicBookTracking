@@ -15,16 +15,16 @@ export function getComicVineBooks(releaseDay, weekAdjustment){
 			weekAdjustment = 0;
 		}
 
-		let dateAdjustment = 3 - 7;
-		if(releaseDay.day() == 3){
-			dateAdjustment = 3;
+		let dateAdjustment = 3;
+		if(releaseDay.day() < 3){
+			dateAdjustment = 3 + 7;
 		}
 
 		releaseDay = releaseDay.day(dateAdjustment);
-		releaseDay = releaseDay.add(weekAdjustment, 'w');
+		if(weekAdjustment !== 0)
+			releaseDay = releaseDay.add(weekAdjustment, 'w');
 
 		dispatch(setCurrentReleaseDay(releaseDay));
-
 		return dispatch({
 			[CALL_API]: {
 				endpoint: keys.endpoint + 'comicVine?releaseDay=' + releaseDay.format(),
@@ -56,12 +56,11 @@ export function showPublisher(publisherKey){
 
 export function attachCurrentSeries(volumeId){
 	return function attachCurrentSeriesThunk(dispatch, getState){
+
 		let state = getState();
 		let comicVineState = state.get('series').toJS();
-		let currentSeries = comicVineState.currentSeries;
-		console.log('action')
-		console.log(currentSeries)
 
+		let currentSeries = comicVineState.currentSeries;
 		return dispatch({
 			[CALL_API]: {
 				endpoint: keys.endpoint + 'comicVine',
@@ -77,7 +76,8 @@ export function attachCurrentSeries(volumeId){
 					keys.comicVineAttachSeries.failure
 				]
 			}
-		}).then(()=> {dispatch(getComicVineBooks())});
+		}).then(()=> {
+			dispatch(getComicVineBooks())});
 	};
 }
 

@@ -14,9 +14,7 @@ const ComicVine = React.createClass({
 			this.props.dispatch(getComicVineBooks());
 	},
 	componentDidMount: function(){
-		if(!this.props.tabs.selectedTab){
-			this.props.dispatch(clickTab(keys.comicVineTabKeys.added));
-		}
+		this.props.dispatch(clickTab(keys.comicVineTabKeys.added));
 	},
 	handleClick: function(e, tabId){
 		if(e)
@@ -80,13 +78,13 @@ const ComicVine = React.createClass({
 			<div>
 				<div className='flex centeringContainer section'>
 					<div className='oneThirdPanel'>
-						<a onClick={this.handleBackWeek}><i className='fa fa-minus-circle'></i></a>
+						<a onClick={this.handleBackWeek}><i className='fa fa-minus-circle fa-2x'></i></a>
 					</div>
 					<div className='oneThirdPanel'>
 						{this.props.comicVine.releaseDay.format('MM-D-YYYY')}
 					</div>
 					<div className='oneThirdPanel'>
-						<a onClick={this.handleAddWeek}><i className='fa fa-plus-circle'></i></a>
+						<a onClick={this.handleAddWeek}><i className='fa fa-plus-circle fa-2x'></i></a>
 					</div>
 				</div>
 				<Tabs tabDefinitions={tabs} clickMethod={this.handleClick}/>

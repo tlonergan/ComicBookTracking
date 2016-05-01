@@ -18,7 +18,7 @@ const NavigationBar = React.createClass({
 						{this.props.pageTitle}
 					</div>
 					<button className='menuButton' onClick={this.clickMenu}>
-						<i className='fa fa-bars'></i>
+						<i className='fa fa-bars fa-2x'></i>
 					</button>
 				</div>
 				<div className={this.state.menuShown ? '' : 'collapse'}>

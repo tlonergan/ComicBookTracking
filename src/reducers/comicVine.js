@@ -15,6 +15,10 @@ export default function comicVineReducer(state = initialState.get('comicVine'), 
       return showSeriesSelector(state, action);
     case keys.comicVineAttachSeries.success:
       return successAttachSeries(state, action);
+    case keys.comicVineAttachSeries.failure:
+      return failure(state, action);
+    case keys.comicVineAttachSeries.getting:
+      return getting(state, action);
     default:
       return state;
   }
@@ -48,4 +52,13 @@ function showSeriesSelector(state, action){
 
 function successAttachSeries(state, action){
   let newState = state.set('showSeriesSelector', null);
+  return newState;
+}
+
+function failure(state, action){
+  return state;
+}
+
+function getting(state, action){
+  return state;
 }
