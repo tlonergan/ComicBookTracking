@@ -27,7 +27,7 @@ export function getComicVineBooks(releaseDay, weekAdjustment){
 		dispatch(setCurrentReleaseDay(releaseDay));
 		return dispatch({
 			[CALL_API]: {
-				endpoint: keys.endpoint + 'comicVine?releaseDay=' + releaseDay.format(),
+				endpoint: keys.endpoint + 'comicVine?releaseDay=' + releaseDay.format('MM-DD-YYYY'),
 				method: 'GET',
 				headers: jsonHeaders,
 				types: [
