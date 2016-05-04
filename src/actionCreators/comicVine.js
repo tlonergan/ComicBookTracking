@@ -7,18 +7,24 @@ import keys from '../core/keys';
 
 export function getComicVineBooks(releaseDay, weekAdjustment){
 	return function getWantListThunk(dispatch, getState){
+		let state = getState();
+		let comicVineState = state.get('comicVine').toJS();
+		let stateReleaseDate = comicVineState.releaseDay;
+
 		if(!releaseDay){
-			releaseDay = moment();
+			releaseDay = stateReleaseDate;
 		}
+
+		if(!releaseDay){
+			releaseDay = moment()
+		}
+
 
 		if(!weekAdjustment){
 			weekAdjustment = 0;
 		}
 
 		let dateAdjustment = 3;
-		if(releaseDay.day() < 3){
-			dateAdjustment = 3 + 7;
-		}
 
 		releaseDay = releaseDay.day(dateAdjustment);
 		if(weekAdjustment !== 0)

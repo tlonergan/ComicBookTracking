@@ -45,7 +45,7 @@ const ComicVine = React.createClass({
 
 		let fetchingMessage = (
 			<div className='centeringContainer'>
-				<i className='fa fa-refresh fa-spin fa-5x'></i>
+				<i className='fa fa-refresh fa-spin fa-3x'></i>
 				<p>Fetching Books</p>
 			</div>
 		);
