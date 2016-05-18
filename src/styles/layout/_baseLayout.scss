@@ -29,7 +29,8 @@ i{
 	display: flex;
 }
 
-.fullWidthPanel{
+.fullWidthPanel,
+.fullWidth{
 	width: 100%;
 }
 
@@ -53,6 +54,7 @@ select{
 	padding: 0;
 	margin: 10px 0;
 	height: 40px;
+	border-radius: 15px;
 }
 
 button{
@@ -94,4 +96,8 @@ button:focus{
 	@media screen and (min-width: $break-large){
 		display: inherit;
 	}
+}
+
+.panel{
+	padding: 10px;
 }

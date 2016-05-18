@@ -23,5 +23,11 @@ export default fromJS({
 		isRetrieving: false,
 		currentSeries: null,
 		unattachedSeries: []
+	},
+	book:{
+		filter:{
+			filterString: '',
+			locationId: null
+		}
 	}
 });

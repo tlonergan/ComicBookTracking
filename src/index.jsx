@@ -8,7 +8,7 @@ import configureStore from './store/configureStore';
 import initialStore from './store/initialStore';
 import App from './components/App';
 import WantList from './containers/wantList';
-import Search from './containers/search';
+import Book from './containers/book';
 import ComicVine from './containers/comicVine';
 require('./styles/_main.scss');
 
@@ -28,7 +28,7 @@ ReactDOM.render(
 			<Route component={App}>
 				<Route path="/" component={WantList} pageTitle="Want Lists" />
 				<Route path="/wantList" component={WantList} pageTitle="Want Lists" />
-				<Route path='/search' component={Search} pageTitle='Search' />
+				<Route path='/search' component={Book} pageTitle='Search' />
 				<Route path='/comicVine' component={ComicVine} pageTitle='Comic Vine' />
 			</Route>
 		</Router>
