@@ -9,6 +9,12 @@ export default function comicVineReducer(state = initialState.get('book'), actio
       return successAddBook(state, action);
     case key.book.comicVine.failure:
       return failureAddBook(state, action);
+    case key.book.bookList.getting:
+      return gettingBookList(state, action);
+    case key.book.bookList.success:
+      return gotBookList(state, action);
+    case key.book.setSearchFilter:
+      return setSearchFilter(state, action);
     default:
       return state;
   }
@@ -24,4 +30,17 @@ function successAddBook(state, action){
 
 function failureAddBook(state, action){
   return state;
+}
+
+function gettingBookList(state, action){
+  return state;
+}
+
+function gotBookList(state, action){
+  return state;
+}
+
+function setSearchFilter(state, action){
+  let newState = state.set('filterString', action.payload);
+  return newState;
 }

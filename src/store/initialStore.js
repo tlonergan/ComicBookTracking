@@ -28,6 +28,11 @@ export default fromJS({
 		filter:{
 			filterString: '',
 			locationId: null
-		}
+		},
+		bookList: []
+	},
+	location:{
+		list:[],
+		isFetching: false
 	}
 });

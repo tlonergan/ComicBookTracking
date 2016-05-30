@@ -8,10 +8,16 @@ const Book = React.createClass({
   render: function(){
     return(
       <div>
-        <BookSearch></BookSearch>
+        <BookSearch books={this.props.book.bookList}></BookSearch>
       </div>
     );
   }
 });
 
-export default connect()(Book);
+function mapStateToProps(state){
+	return{
+    book: state.get('book').toJS()
+	}
+}
+
+export default connect(mapStateToProps)(Book);

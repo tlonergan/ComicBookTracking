@@ -69,8 +69,20 @@ const keys = {
 			getting: 'gettingAddComicVine',
 			success: 'successAddComicVine',
 			failure: 'failureAddComicVine'
+		},
+		get:{
+			getting: 'gettingGetBook',
+			success: 'successGetBook'
+		},
+		setSearchFilter: 'setSearchFilter'
+	},
+	location:{
+		get:{
+			getting: 'gettingGetLocation',
+			success: 'successGetLocation'
 		}
-	}
+	},
+	generalFailureKey: 'serviceFailure'
 };
 
 export default keys;
