@@ -14,6 +14,7 @@ const wantList = React.createClass({
 	},
 	displayName: 'Want Lists',
 	componentWillMount: function(){
+		this.setFocusIndex(-1);
 		this.props.dispatch(getWantListStatuses());
 	},
 	componentDidMount: function(){
@@ -22,10 +23,19 @@ const wantList = React.createClass({
 			this.loadWantList(selectedTab);
 		});
 	},
+	setFocusIndex:function(index){
+		console.log(index)
+		this.setState({focusIndex: index});
+	},
 	handleTabClicked(e, statusId){
 		if(e)
 			e.preventDefault();
 
+		if(this.props.tab.selectedTab && this.props.tab.selectedTab === statusId){
+			return;
+		}
+		
+		this.setFocusIndex(-1);
 		let dispatch = this.props.dispatch;
 		dispatch(clickTab(statusId));
 		this.loadWantList(statusId);
@@ -60,8 +70,10 @@ const wantList = React.createClass({
 					<Tabs tabDefinitions={tabs} clickMethod={this.handleTabClicked}/>
 					<div className='tabPage'>
 						<Wants lists={this.props.wantList.lists}
-							reload={this.loadWantList}
-							wantStatuses={this.props.wantList.statuses}/>
+									 wantStatuses={this.props.wantList.statuses}
+									 focusIndex={this.state.focusIndex}
+									 reload={this.loadWantList}
+									 setFocusIndex={this.setFocusIndex}/>
 					</div>
 				</div>
 				);

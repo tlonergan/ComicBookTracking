@@ -3,33 +3,47 @@ import {connect} from 'react-redux';
 import {toJS} from 'immutable';
 
 import {getBooks, setSearchFilter} from '../actionCreators/book';
+import BookSearchResults from './BookSearchResults';
 
 const BookSearch = React.createClass({
-  searchClickHandler: function(){
-    //search!
+  componentDidMount: function() {
+  },
+  searchClickHandler: function(e){
+    e.preventDefault();
+
+    let locationId = null;
+    let searchFilter = null;
+
+    if(this.state){
+      if(this.state.locationId){
+        locationId = this.state.locationId;
+      }
+
+      if(this.state.searchFilter){
+        searchFilter = this.state.searchFilter;
+      }
+    }
+
+    this.props.dispatch(getBooks(searchFilter, locationId));
   },
   searchFilterChangedHandler: function(e){
-    setSearchFilter(e.target.value);
-    console.log(e.target.value);
+    this.setState({searchFilter: e.target.value});
   },
   locationChanged: function(e){
     this.setState({locationId: e.target.value});
-    console.log(e.target.value);
-    console.log(this);
   },
   render: function(){
-
     return (
       <div className='panel'>
         <div>
           <div className='integratedButtonGroup'>
-            <span onclick={this.searchClickHandler}><i className='fa fa-search'></i></span>
+            <span onClick={this.searchClickHandler}><i className='fa fa-search'></i></span>
             <input type='text' onChange={this.searchFilterChangedHandler}></input>
           </div>
           <div>
             <select className='fullWidth' onChange={this.locationChanged}>
               <option></option>
-              <option>Unread</option>
+              <option value='1'>Unread</option>
             </select>
           </div>
         </div>

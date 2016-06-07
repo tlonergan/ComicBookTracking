@@ -24,11 +24,11 @@ export function addComicVineBook(book){
   };
 }
 
-export function getBook(filterString, locationId){
-  return function getBookThunk(dispatch, getState){
+export function getBooks(filterString, locationId){
+  return function getBooksThunk(dispatch, getState){
     let serviceParameters = '?';
     if(filterString && filterString !== ''){
-      serviceParameters = 'filterString=' + filterString;
+      serviceParameters = serviceParameters + 'filterString=' + filterString;
     }
 
     if(locationId && (locationId !== '' || locationId !== 0)){
@@ -39,11 +39,12 @@ export function getBook(filterString, locationId){
       serviceParameters = serviceParameters + 'locationId=' + locationId;
     }
 
-    let serviceCall = callGetWebservice(keys.book.get, 'book' + serviceParameters);
+    var serviceURI = 'book';
+    if(serviceParameters !== '?'){
+      serviceURI = serviceURI + serviceParameters;
+    }
 
-    return dispatch({
-      serviceCall
-    });
+    return dispatch(callGetWebservice(dispatch, keys.book.get, serviceURI));
   };
 }
 

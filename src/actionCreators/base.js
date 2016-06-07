@@ -3,8 +3,8 @@ import {CALL_API} from 'redux-api-middleware';
 import {jsonHeaders} from '../core/api';
 import keys from '../core/keys';
 
-export function callGetWebservice(serviceKeys, serviceNameAndParameters){
-  return {
+export function callGetWebservice(dispatch, serviceKeys, serviceNameAndParameters){
+  return dispatch({
     [CALL_API]: {
       endpoint: keys.endpoint + serviceNameAndParameters,
       method: 'GET',
@@ -15,5 +15,5 @@ export function callGetWebservice(serviceKeys, serviceNameAndParameters){
         keys.generalFailureKey
       ]
     }
-  };
+  });
 }

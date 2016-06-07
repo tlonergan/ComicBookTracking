@@ -3,17 +3,17 @@ import initialState from '../store/initialStore';
 
 export default function comicVineReducer(state = initialState.get('book'), action){
   switch (action.type) {
-    case key.book.comicVine.getting:
+    case keys.book.addComicVine.getting:
       return gettingAddBook(state, action);
-    case key.book.comicVine.success:
+    case keys.book.addComicVine.success:
       return successAddBook(state, action);
-    case key.book.comicVine.failure:
+    case keys.book.addComicVine.failure:
       return failureAddBook(state, action);
-    case key.book.bookList.getting:
+    case keys.book.get.getting:
       return gettingBookList(state, action);
-    case key.book.bookList.success:
+    case keys.book.get.success:
       return gotBookList(state, action);
-    case key.book.setSearchFilter:
+    case keys.book.setSearchFilter:
       return setSearchFilter(state, action);
     default:
       return state;
@@ -37,7 +37,8 @@ function gettingBookList(state, action){
 }
 
 function gotBookList(state, action){
-  return state;
+  let newState = state.set('bookList', action.payload);
+  return newState;
 }
 
 function setSearchFilter(state, action){

@@ -25,8 +25,10 @@ const WantItem = React.createClass({
 	},
 	saveStatusChange:function(newStatusId){
 		this.props.item.StatusId = newStatusId;
-		this.props.dispatch(saveStatusChange(this.props.item));
-		this.props.reload();
+		this.props.setIndex(this.props.index);
+		this.props.dispatch(saveStatusChange(this.props.item)).then(() => {
+			this.props.reload();
+		});
 	},
 	selectedStatusChanged: function(e){
 		this.setState({selectedStatus: e.target.value});
@@ -74,7 +76,7 @@ const WantItem = React.createClass({
 
 		return (
 			<div className='item'>
-				<h3>
+				<h3 ref={this.props.autoFocus}>
 					{item.Book.Series.Name} #{item.Book.Issue}
 				</h3>
 				<div>
