@@ -11,5 +11,7 @@ export default function baseReducer(state = initialState, action){
 }
 
 function fail(state, action){
+  console.log('FAILURE');
+  console.log(action);
   return state;
 }

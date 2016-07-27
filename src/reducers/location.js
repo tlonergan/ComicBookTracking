@@ -3,9 +3,9 @@ import initialState from '../store/initialStore';
 
 export default function locationReducer(state = initialState.get('location'), action){
   switch(action.type){
-    case key.location.get.getting:
+    case keys.location.get.getting:
       return gettingGetLocation(state, action);
-    case key.location.get.success:
+    case keys.location.get.success:
       return successGetLocation(state, action);
     default:
       return state;

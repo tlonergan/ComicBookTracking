@@ -17,3 +17,19 @@ export function callGetWebservice(dispatch, serviceKeys, serviceNameAndParameter
     }
   });
 }
+
+export function callPutWebservice(dispatch, serviceKeys, serviceName, body){
+  return dispatch({
+    [CALL_API]: {
+      endpoint: keys.endpoint + serviceName,
+      method: 'PUT',
+      headers: jsonHeaders,
+      body: JSON.stringify(body),
+      types: [
+        serviceKeys.getting,
+        serviceKeys.success,
+        keys.generalFailureKey
+      ]
+    }
+  });
+}

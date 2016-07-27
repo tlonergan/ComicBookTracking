@@ -21,7 +21,7 @@ export function getSeriesByName(seriesName){
     });
   };
 }
-
+  
 export function getAllUnattachedSeries(){
   return function getAllUnattachedSeriesThunk(dispatch, getState){
     return dispatch({

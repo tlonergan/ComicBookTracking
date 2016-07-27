@@ -24,6 +24,34 @@ i{
 	margin-right: 5px;
 }
 
+.threeColumns{
+	@extend .flex;
+	width: 100%;
+
+	div{
+		margin: 5px;
+		padding: 5px 10px;
+	}
+
+	> div{
+		width: 33.33%;
+	}
+}
+
+.fourColumns{
+	@extend .flex;
+
+	> div{
+		margin: 0;
+		padding: 5px 10px;
+		width: 25%;
+	}
+
+	>div.two{
+		width: 50%;
+	}
+}
+
 .flex{
 	@extend .fullWidthPanel;
 	display: flex;
@@ -101,4 +129,66 @@ button:focus{
 
 .panel{
 	padding: 10px;
+}
+
+
+.item{
+	background-color: #333;
+	margin-bottom: 10px;
+	padding: 0;
+	border: solid;
+	border-color: #555;
+	border-radius: 7px;
+
+	h3{
+		background-color: $mainAccent;
+		color: #fff;
+		padding: 0;
+		margin: 0;
+		margin-bottom: 5px;
+		font-weight: normal;
+	}
+
+	.tabBody,
+	.itemBody{
+		margin: 15px 10px;
+	}
+
+	.itemButtons{
+		@extend flex;
+
+		:first-child{
+			background-color: $buttonColor;
+			border-radius: 0 0 0 5px;
+		}
+
+		:last-child{
+			border-radius: 0 0 5px 0;
+		}
+
+		a:only-child{
+			width: 100%;
+			border-radius: 0 0 5px 5px;
+		}
+
+		a{
+			width:50%;
+			background-color: $secondaryButtonColor;
+			color: #fff;
+			padding: 8px 12px;
+			font-weight: bold;
+			border-radius: 0 0 5px 5px;
+			text-decoration: none;
+			height: 40px;
+			text-align: center;
+		}
+	}
+}
+
+.table > div:nth-child(odd){
+	background-color: #444344;
+}
+
+.small{
+	font-size: .75em;
 }

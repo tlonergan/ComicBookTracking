@@ -41,7 +41,7 @@ function gettingWantList(state, action){
 function successWantList(state, action){
 	var wantLists = action.payload;
 
-	wantLists = _.sortBy(wantLists, function(item){return item.Book.Series.Name;});
+	wantLists = _.sortBy(wantLists, [item =>{return item.Book.Series.Name;}, item => {return item.Book.Issue;}]);
 	let newState = state.set('lists', wantLists);
 	newState = newState.set('isRetrieving', false);
 	return newState;

@@ -74,6 +74,10 @@ const keys = {
 			getting: 'gettingGetBook',
 			success: 'successGetBook'
 		},
+		put:{
+			getting: 'gettingPutBook',
+			success: 'successPutBook'
+		},
 		setSearchFilter: 'setSearchFilter'
 	},
 	location:{

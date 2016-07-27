@@ -24,7 +24,6 @@ const wantList = React.createClass({
 		});
 	},
 	setFocusIndex:function(index){
-		console.log(index)
 		this.setState({focusIndex: index});
 	},
 	handleTabClicked(e, statusId){
@@ -34,7 +33,7 @@ const wantList = React.createClass({
 		if(this.props.tab.selectedTab && this.props.tab.selectedTab === statusId){
 			return;
 		}
-		
+
 		this.setFocusIndex(-1);
 		let dispatch = this.props.dispatch;
 		dispatch(clickTab(statusId));

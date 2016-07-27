@@ -29,7 +29,9 @@ export default fromJS({
 			filterString: '',
 			locationId: null
 		},
-		bookList: []
+		bookList: [],
+		isFetching: false,
+		isSaving: false
 	},
 	location:{
 		list:[],

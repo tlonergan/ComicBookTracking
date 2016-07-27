@@ -18,30 +18,6 @@ module.exports = {
 			test: /\.scss$/,
 			loaders: ["style", "css", "sass"]
 		},
-		// {
-	 //      test: /\.(png|jpg)$/,
-	 //      loader: 'file?name=images/[name].[ext]'
-  //   	}, 
-  //   	{
-	 //      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-	 //      loader: 'url?name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff' // eslint-disable-line max-len
-  //   	}, 
-  //   	{
-	 //      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-	 //      loader: 'url?name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff' // eslint-disable-line max-len
-	 //    }, 
-	 //    {
-	 //      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-	 //      loader: 'url?name=fonts/[name].[ext]&limit=10000&mimetype=application/octet-stream' // eslint-disable-line max-len
-	 //    }, 
-	 //    {
-	 //      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-	 //      loader: 'file?name=fonts/[name].[ext]'
-	 //    }, 
-	 //    {
-	 //      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-	 //      loader: 'url?name=fonts/[name].[ext]&limit=10000&mimetype=image/svg+xml'
-	 //    }
 	    ]
 	},
 	resolve:{
@@ -60,4 +36,4 @@ module.exports = {
 	plugins:[
 		new webpack.HotModuleReplacementPlugin()
 	]
-}
+};

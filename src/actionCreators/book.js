@@ -4,7 +4,7 @@ import {toJS} from 'immutable';
 
 import {jsonHeaders} from '../core/api';
 import keys from '../core/keys';
-import {callGetWebservice} from './base';
+import {callGetWebservice, callPutWebservice} from './base';
 
 export function addComicVineBook(book){
   return function addComicVineBookThunk(dispatch, getState){
@@ -54,5 +54,13 @@ export function setSearchFilter(searchFilter){
       type: keys.book.setSearchFilter,
       payload: searchFilter
     });
-  }
+  };
+}
+
+export function updateBook(book){
+  return function updateBookThunk(dispatch, state){
+    return dispatch(
+      callPutWebservice(dispatch, keys.book.put, 'book', book)
+    );
+  };
 }

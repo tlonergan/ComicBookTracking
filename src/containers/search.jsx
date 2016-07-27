@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {toJS} from 'immutable';
 
 const Search = React.createClass({
+	componentWillMount: function() {
+	},
 	handleClick: function(e, tabId){
 		if(e)
 			e.preventDefault();
@@ -12,4 +14,4 @@ const Search = React.createClass({
 	}
 });
 
-export default connect()(Search);
+export default connect(mapStateToProps)(Search);

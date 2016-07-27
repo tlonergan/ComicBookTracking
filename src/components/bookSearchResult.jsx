@@ -2,22 +2,46 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {toJS} from 'immutable';
 
+import {updateBook} from '../actionCreators/book';
+
 const BookSearchResult = React.createClass({
+  clickQuickChange: function(statusId, locationId, e){
+    let book = this.props.Book;
+    book.Location.Id = locationId;
+    book.Status = statusId;
+    this.props.dispatch(updateBook(book)).then(() => this.props.fetchBooks(e));
+  },
   render: function(){
     let book = this.props.Book;
 
     if(!book)
       return(<div>A thing</div>);
 
-    return(
-      <div className='flex'>
+    let locationColumnContent = (<div>{book.StatusDisplay}</div>);
+    if(book.Location){
+      locationColumnContent = (
         <div>
+          <div>{book.Location.Name}</div>
+          <div className='small'>{book.StatusDisplay}</div>
+        </div>);
+    }
+
+    let quickChanges = (<div></div>);
+    if(book.AvailableWorkflows){
+      quickChanges = (
+        <div className='flex'>
+          {book.AvailableWorkflows.map(wf => {return (<div key={book.Id + 'quickChange' + wf.Id}><a onClick={() => this.clickQuickChange(wf.NextStatusId, wf.NextLocationId)}>{wf.Display}</a></div>)})}
+        </div>);
+    }
+
+    return(
+      <div className='fourColumns'>
+        <div className='two'>
           <span>{book.Series.Name} #{book.Issue}</span>
         </div>
-        <div>
-        </div>
-        <div>
-          <span>{book.StatusDisplay}</span>
+        {locationColumnContent}
+        <div className='flex two'>
+          {quickChanges}
         </div>
       </div>
     );

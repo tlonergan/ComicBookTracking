@@ -10,7 +10,6 @@ const Wants = React.createClass({
     let focusRef = this.refs[this.props.focusIndex];
     if(focusRef){
       ReactDOM.findDOMNode(focusRef).scrollIntoView();
-        console.log(focusRef)
     }
   },
   render: function() {

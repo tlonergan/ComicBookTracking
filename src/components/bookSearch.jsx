@@ -4,12 +4,14 @@ import {toJS} from 'immutable';
 
 import {getBooks, setSearchFilter} from '../actionCreators/book';
 import BookSearchResults from './BookSearchResults';
+import Loading from './loading';
 
 const BookSearch = React.createClass({
-  componentDidMount: function() {
+  componentWillMount: function() {
   },
   searchClickHandler: function(e){
-    e.preventDefault();
+    if(e && e.preventDefault)
+      e.preventDefault();
 
     let locationId = null;
     let searchFilter = null;
@@ -33,6 +35,8 @@ const BookSearch = React.createClass({
     this.setState({locationId: e.target.value});
   },
   render: function(){
+    let locations = this.props.locations;
+
     return (
       <div className='panel'>
         <div>
@@ -43,11 +47,13 @@ const BookSearch = React.createClass({
           <div>
             <select className='fullWidth' onChange={this.locationChanged}>
               <option></option>
-              <option value='1'>Unread</option>
+              {locations.map(location => {
+                return (<option key={location.Id} value={location.Id}>{location.Name}</option>)
+              })}
             </select>
           </div>
         </div>
-        <BookSearchResults books={this.props.books}/>
+        <BookSearchResults books={this.props.books} isFetchingBooks={this.props.isFetchingBooks} fetchBooks={this.searchClickHandler}/>
       </div>
     );
   }

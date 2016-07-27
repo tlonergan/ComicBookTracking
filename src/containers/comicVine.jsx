@@ -7,6 +7,7 @@ import keys from '../core/keys';
 import PublisherCard from '../components/PublisherCard';
 import {getComicVineBooks} from '../actionCreators/comicVine';
 import {clickTab} from '../actionCreators/tabs';
+import Loading from '../components/Loading';
 
 const ComicVine = React.createClass({
 	componentWillMount: function(){
@@ -43,15 +44,8 @@ const ComicVine = React.createClass({
 			{display: 'Unattached', name: keys.comicVineTabKeys.unattached, icon: 'fa-ban'}
 		];
 
-		let fetchingMessage = (
-			<div className='centeringContainer'>
-				<i className='fa fa-refresh fa-spin fa-3x'></i>
-				<p>Fetching Books</p>
-			</div>
-		);
-
 		if(!this.props.comicVine.comicVineBooks || this.props.comicVine.isRetrieving){
-			return fetchingMessage;
+			return (<Loading></Loading>);
 		}
 
 		let publishers = [];
