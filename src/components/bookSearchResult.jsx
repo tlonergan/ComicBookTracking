@@ -10,6 +10,7 @@ const BookSearchResult = React.createClass({
     book.Location.Id = locationId;
     book.Status = statusId;
     this.props.dispatch(updateBook(book)).then(() => this.props.fetchBooks(e));
+    this.props.setFocusIndex(this.props.focusIndex)
   },
   render: function(){
     let book = this.props.Book;
@@ -34,10 +35,15 @@ const BookSearchResult = React.createClass({
         </div>);
     }
 
+    let extraBookIdentifier = (<span></span>);
+    if(book.IsSpecialCover && book.Notes && book.Notes !== ''){
+      extraBookIdentifier = (<div>({book.Notes})</div>);
+    }
+
     return(
       <div className='fourColumns'>
         <div className='two'>
-          <span>{book.Series.Name} #{book.Issue}</span>
+          <span>{book.Series.Name} #{book.Issue} {extraBookIdentifier}</span>
         </div>
         {locationColumnContent}
         <div className='flex two'>

@@ -18,7 +18,6 @@ const Wants = React.createClass({
   	}
   	let wantList = this.props.lists;
     let wantIndex = -1;
-    let focusIndex = this.props.focusIndex;
     return (
     	<div>
 	    	{wantList.map(item => {

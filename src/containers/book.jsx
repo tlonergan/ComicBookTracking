@@ -10,13 +10,18 @@ const Book = React.createClass({
   componentWillMount: function() {
     this.props.dispatch(getLocations());
   },
+	setFocusIndex:function(index){
+		this.setState({focusIndex: index});
+	},
   render: function(){
     if(this.props.location.isFetching)
       return (<Loading></Loading>);
 
     return(
       <div>
-        <BookSearch books={this.props.book.bookList} locations={this.props.location.list} isFetchingBooks={this.props.book.isFetching}></BookSearch>
+        <BookSearch books={this.props.book.bookList}
+                    locations={this.props.location.list}
+                    isFetchingBooks={this.props.book.isFetching}></BookSearch>
       </div>
     );
   }

@@ -8,7 +8,11 @@ import Loading from './loading';
 
 const BookSearch = React.createClass({
   componentWillMount: function() {
+		this.setFocusIndex(-1);
   },
+	setFocusIndex:function(index){
+		this.setState({focusIndex: index});
+	},
   searchClickHandler: function(e){
     if(e && e.preventDefault)
       e.preventDefault();
@@ -53,7 +57,11 @@ const BookSearch = React.createClass({
             </select>
           </div>
         </div>
-        <BookSearchResults books={this.props.books} isFetchingBooks={this.props.isFetchingBooks} fetchBooks={this.searchClickHandler}/>
+        <BookSearchResults books={this.props.books}
+                           isFetchingBooks={this.props.isFetchingBooks}
+                           fetchBooks={this.searchClickHandler}
+                           setFocusIndex={this.setFocusIndex}
+                           focusIndex={this.state.focusIndex}/>
       </div>
     );
   }

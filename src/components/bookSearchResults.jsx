@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {toJS} from 'immutable';
 
@@ -6,6 +7,14 @@ import BookSearchResult from './BookSearchResult'
 import Loading from './loading';
 
 const BookSearchResults = React.createClass({
+  componentWillMount: function() {
+  },
+  componentDidMount: function() {
+      let focusRef = this.refs[this.props.focusIndex];
+      if(focusRef){
+        ReactDOM.findDOMNode(focusRef).scrollIntoView();
+      }
+  },
   render:function(){
     if(this.props.isFetchingBooks){
       return (<Loading></Loading>);
@@ -21,6 +30,7 @@ const BookSearchResults = React.createClass({
           <span>No books found</span>
         </div>);
 
+    let bookIndex = -1;
     return (
       <div className='item'>
         <h3>
@@ -32,7 +42,13 @@ const BookSearchResults = React.createClass({
         </h3>
         <div className='itemBody table'>
           {books.map(book => {
-            return (<BookSearchResult key={book.Id} Book={book} fetchBooks={this.props.fetchBooks}/>);
+            bookIndex = bookIndex + 1;
+            return (<BookSearchResult key={book.Id}
+                                      ref={bookIndex}
+                                      Book={book}
+                                      fetchBooks={this.props.fetchBooks}
+                                      setFocusIndex={this.props.setFocusIndex}
+                                      focusIndex={bookIndex}/>);
           })}
         </div>
       </div>
