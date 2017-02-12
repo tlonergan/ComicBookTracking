@@ -4,6 +4,7 @@ import {toJS} from 'immutable';
 
 import Wants from '../components/wants';
 import Tabs from '../components/tabs';
+import Loading from '../components/loading';
 import {getWantList, getWantListStatuses} from '../actionCreators/wantList';
 import {clickTab} from '../actionCreators/tabs';
 import keys from '../core/keys';
@@ -50,11 +51,7 @@ const wantList = React.createClass({
 		let tabPage = null;
 
 		if(this.props.wantList.isRetrieving){
-			return (
-				<div className='absoluteCentered'>
-					<p>Loading! Please Wait!</p>
-				</div>
-				);
+      return (<Loading></Loading>);
 		}
 		else{
 			var tabs = [

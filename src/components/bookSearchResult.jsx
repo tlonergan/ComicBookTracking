@@ -12,6 +12,24 @@ const BookSearchResult = React.createClass({
     this.props.dispatch(updateBook(book)).then(() => this.props.fetchBooks(e));
     this.props.setFocusIndex(this.props.focusIndex)
   },
+  clickChangeLocation: function(e){
+    let state = this.state;
+    if(!state){
+      return;
+    }
+
+    let locationId = this.state.locationId;
+    if(!locationId){
+      return;
+    }
+
+    var statusId = this.props.Book.Status;
+    this.clickQuickChange(statusId, locationId, e);
+  },
+  bookLocationChanged: function(e){
+    console.log('loc change');
+    this.setState({locationId: e.target.value});
+  },
   render: function(){
     let book = this.props.Book;
 
@@ -33,6 +51,22 @@ const BookSearchResult = React.createClass({
         <div className='flex'>
           {book.AvailableWorkflows.map(wf => {return (<div key={book.Id + 'quickChange' + wf.Id}><a onClick={() => this.clickQuickChange(wf.NextStatusId, wf.NextLocationId)}>{wf.Display}</a></div>)})}
         </div>);
+    }
+    else{
+        quickChanges = (
+          <div className='flex'>
+            <div>
+              <select onChange={this.bookLocationChanged}>
+                <option></option>
+                {this.props.locations.map(location =>{
+                  return (<option key={location.Id} value={location.Id}>{location.Name}</option>);
+                })}
+              </select>
+            </div>
+            <div>
+              <a onClick={this.clickChangeLocation}>Change Location</a>
+            </div>
+          </div>);
     }
 
     let extraBookIdentifier = (<span></span>);

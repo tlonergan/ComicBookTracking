@@ -14,6 +14,7 @@ const BookSearch = React.createClass({
 		this.setState({focusIndex: index});
 	},
   searchClickHandler: function(e){
+    this.setFocusIndex(-1);
     if(e && e.preventDefault)
       e.preventDefault();
 
@@ -58,6 +59,7 @@ const BookSearch = React.createClass({
           </div>
         </div>
         <BookSearchResults books={this.props.books}
+                           locations={locations}
                            isFetchingBooks={this.props.isFetchingBooks}
                            fetchBooks={this.searchClickHandler}
                            setFocusIndex={this.setFocusIndex}

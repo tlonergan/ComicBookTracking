@@ -7,13 +7,11 @@ import BookSearchResult from './BookSearchResult'
 import Loading from './loading';
 
 const BookSearchResults = React.createClass({
-  componentWillMount: function() {
-  },
-  componentDidMount: function() {
-      let focusRef = this.refs[this.props.focusIndex];
-      if(focusRef){
-        ReactDOM.findDOMNode(focusRef).scrollIntoView();
-      }
+  componentDidUpdate: function(nextProps, nextState) {
+    let focusRef = this.refs[(this.props.focusIndex)];
+    if(focusRef){
+      ReactDOM.findDOMNode(focusRef).scrollIntoView();
+    }
   },
   render:function(){
     if(this.props.isFetchingBooks){
@@ -46,6 +44,7 @@ const BookSearchResults = React.createClass({
             return (<BookSearchResult key={book.Id}
                                       ref={bookIndex}
                                       Book={book}
+                                      locations={this.props.locations}
                                       fetchBooks={this.props.fetchBooks}
                                       setFocusIndex={this.props.setFocusIndex}
                                       focusIndex={bookIndex}/>);
