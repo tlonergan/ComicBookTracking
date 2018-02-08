@@ -124,6 +124,11 @@ button:focus{
 
 	@media screen and (min-width: $break-large){
 		display: inherit;
+		
+		img{
+			max-height: 600px;
+			max-width: auto;
+		}
 	}
 }
 
