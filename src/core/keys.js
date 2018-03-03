@@ -1,5 +1,5 @@
 const keys = {
-	endpoint: 'http://comicbook-env.us-west-2.elasticbeanstalk.com/api/',
+	 endpoint: 'http://comicbookinventory.azurewebsites.net/api/',
 	// endpoint: 'http://localhost:58010/api/',
 	wantList: {
 		getting: "GettingWantList",

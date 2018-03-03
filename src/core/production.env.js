@@ -1,3 +1,3 @@
 module.exports = {
-	endpoint: 'http://comicbook-env.us-west-2.elasticbeanstalk.com/api/'
+	endpoint: 'http://comicbookinventory.azurewebsites.net/api/'
 }
