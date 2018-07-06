@@ -78,7 +78,7 @@ const ComicVineBookCard = React.createClass({
     }
 
     let cardInfo = {
-      title: book.volume.name + ' #' + book.issue_number,
+      title: book.volume.name + ' ' + book.issue_number,
       buttons: buttons
     };
 
