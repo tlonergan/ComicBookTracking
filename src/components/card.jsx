@@ -7,7 +7,11 @@ const Card = React.createClass({
     let cardInfo = this.props.cardInfo;
     return(
       <div className='item'>
-        <h3>{cardInfo.title}</h3>
+        <h3>
+          <span>
+            {cardInfo.title}
+          </span>
+        </h3>
         <div className='tabBody'>
           {this.props.children}
         </div>
