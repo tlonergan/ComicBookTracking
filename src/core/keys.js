@@ -1,6 +1,6 @@
 const keys = {
-	//  endpoint: 'http://comicbookinventory.azurewebsites.net/api/',
-	endpoint: 'http://localhost:58010/api/',
+	 endpoint: 'http://comicbookinventory.azurewebsites.net/api/',
+	// endpoint: 'http://localhost:58010/api/',
 	wantList: {
 		getting: "GettingWantList",
 		success: "SuccessWantList",
