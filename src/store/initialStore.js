@@ -36,5 +36,8 @@ export default fromJS({
 	location:{
 		list:[],
 		isFetching: false
+	},
+	base:{
+		isFailure: false
 	}
 });

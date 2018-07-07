@@ -13,11 +13,12 @@ $mainAccent: #5C4D88;
 
 $accentFont: #EF9616;
 
-$submitButtonColor: #5C4D88;
+$submitButtonColor: $mainAccent;
 
 $buttonColor: #800B00;
 $secondaryButtonColor: #F5AD05;
 
+$errorColor: $buttonColor;
 $accentColor: #F9EBBC;
 
 $secondaryBackground: #555;

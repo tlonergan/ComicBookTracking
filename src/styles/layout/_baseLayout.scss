@@ -24,6 +24,12 @@ i{
 	margin-right: 5px;
 }
 
+.errorPanel{
+	margin: 10px 0;
+	color: $errorColor;
+	font-weight: bold;
+}
+
 .threeColumns{
 	@extend .flex;
 	width: 100%;
@@ -41,10 +47,13 @@ i{
 .fourColumns{
 	@extend .flex;
 
+	padding: 2px 15px;
+
 	> div{
 		margin: 0;
 		padding: 5px 10px;
 		width: 25%;
+		margin: auto;
 	}
 
 	>div.two{
@@ -83,6 +92,7 @@ select{
 	margin: 10px 0;
 	height: 40px;
 	border-radius: 15px;
+	padding-left: 10px;
 }
 
 button{
@@ -177,9 +187,17 @@ button:focus{
 		}
 	}
 
-	h3 :first-child,
-	.cardHeader :first-child{
+	h3 > :first-child,
+	.cardHeader > :first-child{
 		margin-left: 15px;
+	}
+
+	h3 :first-child.fourColumns{
+		margin: 0;
+
+		div{
+			margin:0;
+		}
 	}
 
 	&.collapsed .itemBody{
@@ -220,6 +238,10 @@ button:focus{
 			text-align: center;
 		}
 	}
+}
+
+.itemBody.table{
+	margin: 15px 0px;
 }
 
 .table > div:nth-child(odd){

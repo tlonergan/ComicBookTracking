@@ -1,6 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {toJS} from 'immutable';
 
 const Loading = React.createClass({
   render: function(){

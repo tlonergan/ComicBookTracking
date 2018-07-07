@@ -5,6 +5,7 @@ import {toJS} from 'immutable';
 
 import BookSearchResult from './BookSearchResult'
 import Loading from './loading';
+import Error from './error';
 
 const BookSearchResults = React.createClass({
   componentDidUpdate: function(nextProps, nextState) {
@@ -14,6 +15,9 @@ const BookSearchResults = React.createClass({
     }
   },
   render:function(){
+    if(this.props.isFailure)
+      return (<Error></Error>);
+
     if(this.props.isFetchingBooks){
       return (<Loading></Loading>);
     }

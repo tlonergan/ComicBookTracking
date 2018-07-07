@@ -21,7 +21,8 @@ const Book = React.createClass({
       <div>
         <BookSearch books={this.props.book.bookList}
                     locations={this.props.location.list}
-                    isFetchingBooks={this.props.book.isFetching}></BookSearch>
+                    isFetchingBooks={this.props.book.isFetching}
+                    isFailure={this.props.base.isFailure}></BookSearch>
       </div>
     );
   }
@@ -30,7 +31,8 @@ const Book = React.createClass({
 function mapStateToProps(state){
 	return{
     book: state.get('book').toJS(),
-    location: state.get('location').toJS()
+    location: state.get('location').toJS(),
+    base: state.get('base').toJS()
 	}
 }
 

@@ -15,6 +15,7 @@ const BookSearch = React.createClass({
 	},
   searchClickHandler: function(e){
     this.setFocusIndex(-1);
+    
     if(e && e.preventDefault)
       e.preventDefault();
 
@@ -39,15 +40,18 @@ const BookSearch = React.createClass({
   locationChanged: function(e){
     this.setState({locationId: e.target.value});
   },
+  searchBoxKeyPress: function(e){
+    if(e.key === "Enter")
+      this.searchClickHandler(e);
+  },
   render: function(){
     let locations = this.props.locations;
-
     return (
       <div className='panel'>
         <div>
           <div className='integratedButtonGroup'>
             <span onClick={this.searchClickHandler}><i className='fa fa-search'></i></span>
-            <input type='text' onChange={this.searchFilterChangedHandler}></input>
+            <input type='text' onChange={this.searchFilterChangedHandler} onKeyPress={this.searchBoxKeyPress}></input>
           </div>
           <div>
             <select className='fullWidth' onChange={this.locationChanged}>
@@ -63,7 +67,8 @@ const BookSearch = React.createClass({
                            isFetchingBooks={this.props.isFetchingBooks}
                            fetchBooks={this.searchClickHandler}
                            setFocusIndex={this.setFocusIndex}
-                           focusIndex={this.state.focusIndex}/>
+                           focusIndex={this.state.focusIndex}
+                           isFailure={this.props.isFailure}/>
       </div>
     );
   }
